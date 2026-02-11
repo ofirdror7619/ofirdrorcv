@@ -1,65 +1,176 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 60 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: "easeOut" as const },
+  },
+};
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <main className="bg-black text-textgray overflow-x-hidden">
+      
+      {/* ================= HERO ================= */}
+
+      <section className="relative h-screen flex items-center justify-center text-center">
+        
+        {/* Hero Image */}
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src="/Logo.png"
+          alt="ShkheeV MerA"
+          fill
           priority
+          className="object-contain opacity-100 scale-105 brightness-105"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-darkbg"></div>
+
+        {/* Content */}
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={fadeUp}
+          className="relative z-10 px-6"
+        >
+<a href="#music" className="group relative inline-block mt-6 -translate-y-2.5">
+  
+  {/* glow */}
+  <span className="absolute inset-0 rounded-md bg-white/10 blur-lg opacity-0 group-hover:opacity-100 transition duration-700"></span>
+
+  {/* button */}
+  <span className="
+    relative
+    px-5 py-5
+    tracking-[0.25em]
+    border border-white/40
+    text-white
+    uppercase
+    text-sm
+    backdrop-blur-sm
+    transition
+    duration-500
+    group-hover:border-white
+    group-hover:bg-white
+    group-hover:text-black
+  ">
+    ENTER THE RITUAL
+  </span>
+
+</a>
+
+        </motion.div>
+      </section>
+
+      <Navbar />
+
+      {/* ================= MUSIC ================= */}
+
+      <motion.section
+        id="music"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="py-32 px-6 md:px-20 text-center"
+      >
+        <h2 className="text-5xl text-white mb-16 font-semibold">Latest Release</h2>
+
+        <div className="flex justify-center">
+          <iframe
+            src="https://open.spotify.com/embed/album/0VjIjW4GlUZAMYd2vXMwbU"
+            width="350"
+            height="420"
+            allow="encrypted-media"
+            className="rounded-lg shadow-2xl"
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </motion.section>
+
+      {/* ================= PARALLAX BREAK ================= */}
+
+      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        
+        <Image
+          src="/band-live.jpg"
+          alt="Live show"
+          fill
+          className="object-cover opacity-30 scale-110"
+        />
+
+        <div className="absolute inset-0 bg-black/70" />
+
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="relative text-4xl md:text-6xl tracking-wide text-center px-6"
+        >
+          NO RITUAL. NO SOUND.  
+          <br />
+          WITHOUT SACRIFICE.
+        </motion.h2>
+      </section>
+
+      {/* ================= GALLERY ================= */}
+
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="py-32 px-6 md:px-20"
+      >
+        <h2 className="text-5xl text-center mb-20">Gallery</h2>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {["/g1.jpg", "/g2.jpg", "/g3.jpg"].map((img, i) => (
+            <div
+              key={i}
+              className="relative h-[420px] overflow-hidden group cursor-pointer"
+            >
+              <Image
+                src={img}
+                alt="Band photo"
+                fill
+                className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition duration-700"
+              />
+            </div>
+          ))}
         </div>
-      </main>
-    </div>
+      </motion.section>
+
+      {/* ================= TOUR ================= */}
+
+      <motion.section
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="py-32 bg-darksection text-center"
+      >
+        <h2 className="text-5xl mb-16">Tour</h2>
+
+        <div className="space-y-10 text-lg">
+          <p>15 MAY 2026 — BERLIN</p>
+          <p>28 JUN 2026 — LONDON</p>
+          <p>12 JUL 2026 — NEW YORK</p>
+        </div>
+      </motion.section>
+
+      {/* ================= FOOTER ================= */}
+
+      <footer className="py-16 text-center text-gray-500">
+        © {new Date().getFullYear()} ShkheeV MerA
+      </footer>
+    </main>
   );
 }
