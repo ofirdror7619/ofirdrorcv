@@ -163,7 +163,7 @@ export default function Home() {
           {[
             { id: "g1", src: "/g1.png" },
             { id: "g2", src: "/Logo 2.png" },
-            { id: "g3", src: "/Logo.png" },
+            { id: "g3", src: "/g3.png" },
           ].map((img) => (
             <button
               type="button"
