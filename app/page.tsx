@@ -111,11 +111,11 @@ export default function Home() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="relative text-4xl md:text-6xl tracking-wide text-center px-6"
+          className="text-white relative text-4xl md:text-6xl tracking-wide text-center px-6"
         >
-          NO RITUAL. NO SOUND.  
+          ONLY THE DYING HEAR OUR CALL.
           <br />
-          WITHOUT SACRIFICE.
+          SUFFER.
         </motion.h2>
       </section>
 
@@ -150,25 +150,24 @@ export default function Home() {
       {/* ================= TOUR ================= */}
 
       <motion.section
+        id="tour"
         variants={fadeUp}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="py-32 bg-darksection text-center"
+        className="text-white py-32 bg-darksection text-center"
       >
         <h2 className="text-5xl mb-16">Tour</h2>
 
         <div className="space-y-10 text-lg">
-          <p>15 MAY 2026 — BERLIN</p>
-          <p>28 JUN 2026 — LONDON</p>
-          <p>12 JUL 2026 — NEW YORK</p>
+          <p>Rituals will be announced soon.</p>
         </div>
       </motion.section>
 
       {/* ================= FOOTER ================= */}
 
       <footer className="py-16 text-center text-gray-500">
-        © {new Date().getFullYear()} ShkheeV MerA
+        © {new Date().getFullYear()} ShkheeV MerA • Where Light Dies, We Reign
       </footer>
     </main>
   );
