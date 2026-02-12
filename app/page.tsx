@@ -143,7 +143,7 @@ export default function Home() {
         <h2 className="text-5xl text-center mb-20">Gallery</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {["/g1.jpg", "/g2.jpg", "/g3.jpg"].map((img) => (
+          {["/g1.png", "/g2.jpg", "/g3.jpg"].map((img) => (
             <div
               key={img}
               className="relative h-[420px] overflow-hidden group cursor-pointer"
@@ -152,7 +152,7 @@ export default function Home() {
                 src={img}
                 alt="Band photo"
                 fill
-                className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition duration-700"
+                  className="object-contain bg-black grayscale group-hover:grayscale-0 transition duration-700"
               />
             </div>
           ))}
