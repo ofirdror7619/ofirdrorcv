@@ -13,6 +13,15 @@ const fadeUp = {
   },
 };
 
+const fadeUp80 = {
+  hidden: { opacity: 0, y: 60 },
+  show: {
+    opacity: 0.8,
+    y: 0,
+    transition: { duration: 0.9, ease: "easeOut" as const },
+  },
+};
+
 export default function Home() {
   return (
     <main className="bg-black text-textgray overflow-x-hidden">
@@ -84,6 +93,7 @@ export default function Home() {
 
         <div className="flex justify-center">
           <iframe
+            title="Spotify embed: Latest Release"
             src="https://open.spotify.com/embed/album/0VjIjW4GlUZAMYd2vXMwbU"
             width="350"
             height="420"
@@ -107,7 +117,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/70" />
 
         <motion.h2
-          variants={fadeUp}
+          variants={fadeUp80}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -131,9 +141,9 @@ export default function Home() {
         <h2 className="text-5xl text-center mb-20">Gallery</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {["/g1.jpg", "/g2.jpg", "/g3.jpg"].map((img, i) => (
+          {["/g1.jpg", "/g2.jpg", "/g3.jpg"].map((img) => (
             <div
-              key={i}
+              key={img}
               className="relative h-[420px] overflow-hidden group cursor-pointer"
             >
               <Image
