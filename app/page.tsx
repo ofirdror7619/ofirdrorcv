@@ -162,7 +162,7 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { id: "g1", src: "/g1.png" },
-            { id: "g2", src: "/Logo 2.png" },
+            { id: "g2", src: "/Logo.png" },
             { id: "g3", src: "/g3.png" },
           ].map((img) => (
             <button
