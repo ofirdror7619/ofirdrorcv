@@ -150,6 +150,7 @@ export default function Home() {
       {/* ================= GALLERY ================= */}
 
       <motion.section
+        id="gallery"
         variants={fadeUp}
         initial="hidden"
         whileInView="show"
