@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -23,6 +24,32 @@ const fadeUp80 = {
 };
 
 export default function Home() {
+  const [activeGalleryImage, setActiveGalleryImage] = useState<string | null>(null);
+  const scrollYRef = useRef(0);
+
+  useEffect(() => {
+    if (!activeGalleryImage) return;
+
+    scrollYRef.current = window.scrollY;
+
+    const bodyStyle = document.body.style;
+    const previousPosition = bodyStyle.position;
+    const previousTop = bodyStyle.top;
+    const previousWidth = bodyStyle.width;
+
+    bodyStyle.position = "fixed";
+    bodyStyle.top = `-${scrollYRef.current}px`;
+    bodyStyle.width = "100%";
+
+    return () => {
+      bodyStyle.position = previousPosition;
+      bodyStyle.top = previousTop;
+      bodyStyle.width = previousWidth;
+
+      window.scrollTo(0, scrollYRef.current);
+    };
+  }, [activeGalleryImage]);
+
   return (
     <main className="bg-black text-textgray overflow-x-hidden">
       
@@ -143,10 +170,13 @@ export default function Home() {
         <h2 className="text-5xl text-center mb-20">Gallery</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {["/g1.png", "/g2.jpg", "/g3.jpg"].map((img) => (
-            <div
+          {["/g1.png", "/logo.png", "/g3.jpg"].map((img) => (
+            <button
+              type="button"
               key={img}
+              onClick={() => setActiveGalleryImage(img)}
               className="relative h-[420px] overflow-hidden group cursor-pointer"
+              aria-label="Open gallery image"
             >
               <Image
                 src={img}
@@ -154,10 +184,37 @@ export default function Home() {
                 fill
                   className="object-contain bg-black grayscale group-hover:grayscale-0 transition duration-700"
               />
-            </div>
+            </button>
           ))}
         </div>
       </motion.section>
+
+      {activeGalleryImage && (
+        <dialog
+          open
+          aria-label="Gallery image preview"
+          className="fixed inset-0 z-[60] m-0 p-0 bg-transparent"
+        >
+          <button
+            type="button"
+            aria-label="Close image preview"
+            className="absolute inset-0 bg-black/80"
+            onClick={() => setActiveGalleryImage(null)}
+          />
+
+          <div className="absolute inset-0 flex items-center justify-center p-6">
+            <div className="relative z-10 w-[92vw] h-[82vh] max-w-6xl">
+              <Image
+                src={activeGalleryImage}
+                alt="Gallery image"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </div>
+        </dialog>
+      )}
 
       {/* ================= TOUR ================= */}
 
