@@ -51,7 +51,7 @@ export default function Home() {
       
       {/* ================= HERO ================= */}
 
-      <section className="relative h-screen flex items-center justify-center text-center">
+      <section className="relative h-screen min-h-[100svh] flex items-center justify-center text-center">
         
         <Image
           src="/Logo.png"
@@ -69,7 +69,7 @@ export default function Home() {
           initial="hidden"
           animate="show"
           variants={fadeUp}
-          className="relative z-10 px-6"
+          className="relative z-10 px-4 sm:px-6"
         >
 <a href="#music" className="group relative inline-block mt-6 -translate-y-2.5">
   
@@ -79,12 +79,18 @@ export default function Home() {
   {/* button */}
   <span className="
     relative
-    px-5 py-5
-    tracking-[0.25em]
+    inline-flex
+    max-w-[92vw]
+    justify-center
+    px-3 py-3
+    sm:px-5 sm:py-5
+    tracking-[0.16em]
+    sm:tracking-[0.25em]
     border border-white/40
     text-white
     uppercase
-    text-sm
+    text-[11px]
+    sm:text-sm
     backdrop-blur-sm
     transition
     duration-500
@@ -110,27 +116,29 @@ export default function Home() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="py-32 px-6 md:px-20 text-center"
+        className="scroll-mt-28 py-16 px-4 text-center sm:py-24 sm:px-6 md:px-12 lg:py-32 lg:px-20"
       >
-        <h2 className="text-5xl text-white mb-16 font-semibold">Latest Release</h2>
+        <h2 className="text-3xl text-white mb-10 font-semibold sm:text-4xl sm:mb-14 lg:text-5xl lg:mb-16">
+          Latest Release
+        </h2>
 
         <div className="flex justify-center">
+          <div className="w-full max-w-[420px] aspect-[35/42]">
           <iframe
             title="YouTube video: Latest Release"
             src="https://www.youtube.com/embed/tL6crmE2NEU"
-            width="350"
-            height="420"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
-            className="rounded-lg shadow-2xl"
+            className="w-full h-full rounded-lg shadow-2xl"
           />
+          </div>
         </div>
       </motion.section>
 
       {/* ================= PARALLAX BREAK ================= */}
 
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[60vh] min-h-[360px] sm:min-h-[420px] flex items-center justify-center overflow-hidden">
         
         <div className="absolute inset-0 bg-black/70" />
 
@@ -139,7 +147,7 @@ export default function Home() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="text-white text-5xl md:text-7xl font-black uppercase leading-tight tracking-widest opacity-80"
+          className="px-4 text-center text-white text-3xl font-black uppercase leading-tight tracking-[0.18em] opacity-80 sm:px-6 sm:text-5xl sm:tracking-widest md:text-7xl"
         >
           ONLY THE DYING HEAR OUR CALL.
           <br />
@@ -155,11 +163,11 @@ export default function Home() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="py-32 px-6 md:px-20"
+        className="scroll-mt-28 py-16 px-4 sm:py-24 sm:px-6 md:px-12 lg:py-32 lg:px-20"
       >
-        <h2 className="text-5xl text-center mb-20">Gallery</h2>
+        <h2 className="text-3xl text-center mb-12 sm:text-4xl sm:mb-16 lg:text-5xl lg:mb-20">Gallery</h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {[
             { id: "g1", src: "/g1.png" },
             { id: "g2", src: "/Logo.png" },
@@ -169,7 +177,7 @@ export default function Home() {
               type="button"
               key={img.id}
               onClick={() => openGalleryImage(img.src)}
-              className="relative h-[420px] overflow-hidden group cursor-pointer"
+              className="relative h-[260px] overflow-hidden group cursor-pointer sm:h-[320px] lg:h-[420px]"
               aria-label="Open gallery image"
             >
               <Image
@@ -192,8 +200,8 @@ export default function Home() {
             onClick={closeGalleryImage}
           />
 
-          <div className="absolute inset-0 flex items-center justify-center p-6 pointer-events-none">
-            <div className="relative z-10 w-[92vw] h-[82vh] max-w-6xl pointer-events-auto">
+          <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 pointer-events-none">
+            <div className="relative z-10 w-[94vw] h-[78svh] max-w-6xl pointer-events-auto sm:w-[92vw] sm:h-[82vh]">
               <Image
                 src={activeGalleryImage}
                 alt="Gallery image"
@@ -214,9 +222,9 @@ export default function Home() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="text-white py-32 bg-darksection text-center"
+        className="scroll-mt-28 text-white py-16 bg-darksection text-center sm:py-24 lg:py-32"
       >
-        <h2 className="text-5xl mb-16">Tour</h2>
+        <h2 className="text-3xl mb-10 sm:text-4xl sm:mb-14 lg:text-5xl lg:mb-16">Tour</h2>
 
         <div className="space-y-10 text-lg">
           <p>Rituals will be announced soon.</p>
@@ -225,7 +233,7 @@ export default function Home() {
 
       {/* ================= FOOTER ================= */}
 
-      <footer className="py-16 text-center text-gray-500">
+      <footer className="py-10 px-4 text-center text-gray-500 sm:py-16">
         © {new Date().getFullYear()} ShkheeV MerA • Where Light Dies, We Reign
       </footer>
     </main>

@@ -45,28 +45,44 @@ export default function Navbar() {
         }
       `}
     >
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-8 py-5">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between gap-4 px-4 py-4 sm:px-6 sm:py-5 lg:px-8">
 
         {/* LOGO */}
-        <div className="
-          text-sm
-          tracking-[0.4em]
-          font-semibold
-          text-white/80
-          hover:text-white
-          transition
-          cursor-pointer
-        ">
+        <div
+          className="
+            shrink-0
+            whitespace-nowrap
+            text-xs
+            sm:text-sm
+            tracking-[0.28em]
+            sm:tracking-[0.4em]
+            font-semibold
+            text-white/80
+            hover:text-white
+            transition
+            cursor-pointer
+          "
+        >
           ShkheeV MerA
         </div>
 
         {/* LINKS */}
-        <div className="
-          flex gap-12
-          text-xs
-          tracking-[0.28em]
-          text-white/70
-        ">
+        <div
+          className="
+            flex
+            flex-wrap
+            justify-end
+            gap-x-6
+            gap-y-2
+            sm:gap-x-10
+            lg:gap-x-12
+            text-[10px]
+            sm:text-xs
+            tracking-[0.22em]
+            sm:tracking-[0.28em]
+            text-white/70
+          "
+        >
           <a href="#music" className="hover:text-white transition">
             Music
           </a>
