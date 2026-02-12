@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -25,30 +25,26 @@ const fadeUp80 = {
 
 export default function Home() {
   const [activeGalleryImage, setActiveGalleryImage] = useState<string | null>(null);
-  const scrollYRef = useRef(0);
 
   useEffect(() => {
     if (!activeGalleryImage) return;
 
-    scrollYRef.current = window.scrollY;
-
     const bodyStyle = document.body.style;
-    const previousPosition = bodyStyle.position;
-    const previousTop = bodyStyle.top;
-    const previousWidth = bodyStyle.width;
-
-    bodyStyle.position = "fixed";
-    bodyStyle.top = `-${scrollYRef.current}px`;
-    bodyStyle.width = "100%";
+    const previousOverflow = bodyStyle.overflow;
+    bodyStyle.overflow = "hidden";
 
     return () => {
-      bodyStyle.position = previousPosition;
-      bodyStyle.top = previousTop;
-      bodyStyle.width = previousWidth;
-
-      window.scrollTo(0, scrollYRef.current);
+      bodyStyle.overflow = previousOverflow;
     };
   }, [activeGalleryImage]);
+
+  const openGalleryImage = (img: string) => {
+    setActiveGalleryImage(img);
+  };
+
+  const closeGalleryImage = () => {
+    setActiveGalleryImage(null);
+  };
 
   return (
     <main className="bg-black text-textgray overflow-x-hidden">
@@ -136,13 +132,6 @@ export default function Home() {
 
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         
-        <Image
-          src="/band-live.jpg"
-          alt="Live show"
-          fill
-          className="object-cover opacity-30 scale-110"
-        />
-
         <div className="absolute inset-0 bg-black/70" />
 
         <motion.h2
@@ -170,19 +159,23 @@ export default function Home() {
         <h2 className="text-5xl text-center mb-20">Gallery</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {["/g1.png", "/logo.png", "/g3.jpg"].map((img) => (
+          {[
+            { id: "g1", src: "/g1.png" },
+            { id: "g2", src: "/Logo 2.png" },
+            { id: "g3", src: "/Logo.png" },
+          ].map((img) => (
             <button
               type="button"
-              key={img}
-              onClick={() => setActiveGalleryImage(img)}
+              key={img.id}
+              onClick={() => openGalleryImage(img.src)}
               className="relative h-[420px] overflow-hidden group cursor-pointer"
               aria-label="Open gallery image"
             >
               <Image
-                src={img}
+                src={img.src}
                 alt="Band photo"
                 fill
-                  className="object-contain bg-black grayscale group-hover:grayscale-0 transition duration-700"
+                className="object-contain bg-black grayscale group-hover:grayscale-0 transition duration-700"
               />
             </button>
           ))}
@@ -190,20 +183,16 @@ export default function Home() {
       </motion.section>
 
       {activeGalleryImage && (
-        <dialog
-          open
-          aria-label="Gallery image preview"
-          className="fixed inset-0 z-[60] m-0 p-0 bg-transparent"
-        >
+        <div className="fixed inset-0 z-[60]">
           <button
             type="button"
             aria-label="Close image preview"
             className="absolute inset-0 bg-black/80"
-            onClick={() => setActiveGalleryImage(null)}
+            onClick={closeGalleryImage}
           />
 
-          <div className="absolute inset-0 flex items-center justify-center p-6">
-            <div className="relative z-10 w-[92vw] h-[82vh] max-w-6xl">
+          <div className="absolute inset-0 flex items-center justify-center p-6 pointer-events-none">
+            <div className="relative z-10 w-[92vw] h-[82vh] max-w-6xl pointer-events-auto">
               <Image
                 src={activeGalleryImage}
                 alt="Gallery image"
@@ -213,7 +202,7 @@ export default function Home() {
               />
             </div>
           </div>
-        </dialog>
+        </div>
       )}
 
       {/* ================= TOUR ================= */}
