@@ -71,12 +71,12 @@ export default function Navbar() {
             Music
           </a>
 
-          <a href="#tour" className="hover:text-white transition">
-            Tour
-          </a>
-
           <a href="#gallery" className="hover:text-white transition">
             Gallery
+          </a>
+
+                    <a href="#tour" className="hover:text-white transition">
+            Tour
           </a>
 
                 <a href="#gallery" className="hover:text-white transition">

@@ -93,11 +93,13 @@ export default function Home() {
 
         <div className="flex justify-center">
           <iframe
-            title="Spotify embed: Latest Release"
-            src="https://open.spotify.com/embed/album/0VjIjW4GlUZAMYd2vXMwbU"
+            title="YouTube video: Latest Release"
+            src="https://www.youtube.com/embed/tL6crmE2NEU"
             width="350"
             height="420"
-            allow="encrypted-media"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
             className="rounded-lg shadow-2xl"
           />
         </div>
