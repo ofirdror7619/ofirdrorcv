@@ -111,7 +111,7 @@ export default function Home() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="text-white relative text-4xl md:text-6xl tracking-wide text-center px-6"
+          className="text-white text-5xl md:text-7xl font-black uppercase leading-tight tracking-widest opacity-80"
         >
           ONLY THE DYING HEAR OUR CALL.
           <br />
