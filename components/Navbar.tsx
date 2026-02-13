@@ -6,6 +6,12 @@ export default function Navbar() {
   const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   useEffect(() => {
     let lastScroll = window.scrollY;
 
@@ -48,7 +54,9 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto flex items-center justify-between gap-4 px-4 py-4 sm:px-6 sm:py-5 lg:px-8">
 
         {/* LOGO */}
-        <div
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="
             shrink-0
             whitespace-nowrap
@@ -64,7 +72,7 @@ export default function Navbar() {
           "
         >
           ShkheeV MerA
-        </div>
+        </button>
 
         {/* LINKS */}
         <div
@@ -83,22 +91,21 @@ export default function Navbar() {
             text-white/70
           "
         >
-          <a href="#music" className="hover:text-white transition">
+          <button type="button" onClick={() => scrollToSection("music")} className="hover:text-white transition">
             Music
-          </a>
+          </button>
 
-          <a href="#gallery" className="hover:text-white transition">
+          <button type="button" onClick={() => scrollToSection("gallery")} className="hover:text-white transition">
             Gallery
-          </a>
+          </button>
 
-                    <a href="#tour" className="hover:text-white transition">
-            Tour
-          </a>
-
-                <a href="#gallery" className="hover:text-white transition">
+          <button type="button" onClick={() => scrollToSection("emissaries")} className="hover:text-white transition">
             Emissaries of Death
-          </a>
+          </button>
 
+          <button type="button" onClick={() => scrollToSection("tour")} className="hover:text-white transition">
+            Tour
+          </button>
         </div>
 
       </nav>

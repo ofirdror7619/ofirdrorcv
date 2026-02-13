@@ -47,7 +47,7 @@ export default function Home() {
   };
 
   return (
-    <main className="bg-black text-textgray overflow-x-hidden">
+    <main className="bg-black text-gray-400 overflow-x-hidden">
       
       {/* ================= HERO ================= */}
 
@@ -62,7 +62,7 @@ export default function Home() {
         />
 
         {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-darkbg"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black"></div>
 
         {/* Content */}
         <motion.div
@@ -71,37 +71,41 @@ export default function Home() {
           variants={fadeUp}
           className="relative z-10 px-4 sm:px-6"
         >
-<a href="#music" className="group relative inline-block mt-6 -translate-y-2.5">
-  
-  {/* glow */}
-  <span className="absolute inset-0 rounded-md bg-white/10 blur-lg opacity-0 group-hover:opacity-100 transition duration-700"></span>
+          <button
+            type="button"
+            onClick={() => document.getElementById("music")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            className="group relative inline-block mt-6 -translate-y-2.5"
+          >
+            
+            {/* glow */}
+            <span className="absolute inset-0 rounded-md bg-white/10 blur-lg opacity-0 group-hover:opacity-100 transition duration-700"></span>
 
-  {/* button */}
-  <span className="
-    relative
-    inline-flex
-    max-w-[92vw]
-    justify-center
-    px-3 py-3
-    sm:px-5 sm:py-5
-    tracking-[0.16em]
-    sm:tracking-[0.25em]
-    border border-white/40
-    text-white
-    uppercase
-    text-[11px]
-    sm:text-sm
-    backdrop-blur-sm
-    transition
-    duration-500
-    group-hover:border-white
-    group-hover:bg-white
-    group-hover:text-black
-  ">
-    ENTER THE RITUAL
-  </span>
+            {/* button */}
+            <span className="
+              relative
+              inline-flex
+              max-w-[92vw]
+              justify-center
+              px-3 py-3
+              sm:px-5 sm:py-5
+              tracking-[0.16em]
+              sm:tracking-[0.25em]
+              border border-white/40
+              text-white
+              uppercase
+              text-[11px]
+              sm:text-sm
+              backdrop-blur-sm
+              transition
+              duration-500
+              group-hover:border-white
+              group-hover:bg-white
+              group-hover:text-black
+            ">
+              ENTER THE RITUAL
+            </span>
 
-</a>
+          </button>
 
         </motion.div>
       </section>
@@ -124,15 +128,15 @@ export default function Home() {
 
         <div className="flex justify-center">
           <div className="w-full max-w-[420px] aspect-[35/42]">
-          <iframe
-            title="YouTube video: Latest Release"
-            src="https://www.youtube.com/embed/J2ahCFtWksI"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-            loading="lazy"
-            className="w-full h-full rounded-lg shadow-2xl"
-          />
+            <iframe
+              title="YouTube video: Latest Release"
+              src="https://www.youtube.com/embed/J2ahCFtWksI"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              loading="lazy"
+              className="w-full h-full rounded-lg shadow-2xl"
+            />
           </div>
         </div>
       </motion.section>
@@ -156,6 +160,50 @@ export default function Home() {
         </motion.h2>
       </section>
 
+      {/* ================= EMISSARIES OF DEATH ================= */}
+
+      <motion.section
+        id="emissaries"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="relative scroll-mt-28 py-20 px-4 sm:py-28 sm:px-6 md:px-12 lg:px-20"
+      >
+        <h2 className="text-3xl text-white text-center mb-14 sm:text-4xl lg:text-5xl">
+          Emissaries of Death
+        </h2>
+
+        <div className="relative mx-auto max-w-5xl h-[520px] sm:h-[620px] overflow-hidden bg-black">
+          <Image
+            src="/me1.png"
+            alt="Emissary of Death"
+            fill
+            className="object-cover object-[50%_20%] scale-90 grayscale contrast-105 brightness-95"
+          />
+
+          {/* heavy vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/70" />
+
+          {/* text */}
+          <div className="absolute bottom-16 left-10 max-w-xl">
+            <h3 className="text-white text-4xl sm:text-5xl tracking-[0.25em] font-semibold">
+              Lord OFear
+            </h3>
+
+            <p className="mt-4 text-white/80 tracking-[0.35em] uppercase text-sm">
+              Guitars • Bass • Illness Melodies
+            </p>
+
+            <p className="mt-6 text-white/70 leading-relaxed">
+              Among the dying, he wanders. <br/>
+              Breath fades before his gaze. <br/>
+              All that survives mourns in silence.
+            </p>
+          </div>
+        </div>
+      </motion.section>
+
       {/* ================= GALLERY ================= */}
 
       <motion.section
@@ -166,7 +214,7 @@ export default function Home() {
         viewport={{ once: true }}
         className="scroll-mt-28 py-16 px-4 sm:py-24 sm:px-6 md:px-12 lg:py-32 lg:px-20"
       >
-        <h2 className="text-3xl text-center mb-12 sm:text-4xl sm:mb-16 lg:text-5xl lg:mb-20">Gallery</h2>
+        <h2 className="text-3xl text-white text-center mb-12 sm:text-4xl sm:mb-16 lg:text-5xl lg:mb-20">Gallery</h2>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {[
@@ -223,7 +271,7 @@ export default function Home() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="scroll-mt-28 text-white py-16 bg-darksection text-center sm:py-24 lg:py-32"
+        className="scroll-mt-28 text-white py-16 bg-black text-center sm:py-24 lg:py-32"
       >
         <h2 className="text-3xl mb-10 sm:text-4xl sm:mb-14 lg:text-5xl lg:mb-16">Tour</h2>
 
