@@ -95,12 +95,12 @@ export default function Navbar() {
             Music
           </button>
 
-          <button type="button" onClick={() => scrollToSection("gallery")} className="hover:text-white transition">
-            Gallery
-          </button>
-
           <button type="button" onClick={() => scrollToSection("emissaries")} className="hover:text-white transition">
             Emissaries of Death
+          </button>
+
+          <button type="button" onClick={() => scrollToSection("gallery")} className="hover:text-white transition">
+            Gallery
           </button>
 
           <button type="button" onClick={() => scrollToSection("tour")} className="hover:text-white transition">
