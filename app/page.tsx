@@ -126,10 +126,11 @@ export default function Home() {
           <div className="w-full max-w-[420px] aspect-[35/42]">
           <iframe
             title="YouTube video: Latest Release"
-            src="https://www.youtube.com/embed/tL6crmE2NEU"
+            src="https://www.youtube.com/embed/J2ahCFtWksI"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
+            loading="lazy"
             className="w-full h-full rounded-lg shadow-2xl"
           />
           </div>
