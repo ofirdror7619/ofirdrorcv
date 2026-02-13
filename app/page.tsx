@@ -26,18 +26,6 @@ const fadeUp80 = {
 export default function Home() {
   const [activeGalleryImage, setActiveGalleryImage] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!activeGalleryImage) return;
-
-    const bodyStyle = document.body.style;
-    const previousOverflow = bodyStyle.overflow;
-    bodyStyle.overflow = "hidden";
-
-    return () => {
-      bodyStyle.overflow = previousOverflow;
-    };
-  }, [activeGalleryImage]);
-
   const openGalleryImage = (img: string) => {
     setActiveGalleryImage(img);
   };
@@ -46,13 +34,29 @@ export default function Home() {
     setActiveGalleryImage(null);
   };
 
+  useEffect(() => {
+    if (!activeGalleryImage) return;
+
+    const bodyStyle = document.body.style;
+    const previousOverflow = bodyStyle.overflow;
+    bodyStyle.overflow = "hidden";
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeGalleryImage();
+    };
+
+    globalThis.addEventListener("keydown", handleEscape);
+
+    return () => {
+      bodyStyle.overflow = previousOverflow;
+      globalThis.removeEventListener("keydown", handleEscape);
+    };
+  }, [activeGalleryImage]);
+
   return (
     <main className="bg-black text-gray-400 overflow-x-hidden">
-      
       {/* ================= HERO ================= */}
-
       <section className="relative h-screen min-h-[100svh] flex items-center justify-center text-center">
-        
         <Image
           src="/Logo.png"
           alt="ShkheeV MerA"
@@ -62,7 +66,7 @@ export default function Home() {
         />
 
         {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black" />
 
         {/* Content */}
         <motion.div
@@ -73,44 +77,70 @@ export default function Home() {
         >
           <button
             type="button"
-            onClick={() => document.getElementById("music")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            onClick={() =>
+              document.getElementById("occult")?.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
             className="group relative inline-block mt-6 -translate-y-2.5"
           >
-            
             {/* glow */}
-            <span className="absolute inset-0 rounded-md bg-white/10 blur-lg opacity-0 group-hover:opacity-100 transition duration-700"></span>
+            <span className="absolute inset-0 rounded-md bg-white/10 blur-lg opacity-0 group-hover:opacity-100 transition duration-700" />
 
             {/* button */}
-            <span className="
-              relative
-              inline-flex
-              max-w-[92vw]
-              justify-center
-              px-3 py-3
-              sm:px-5 sm:py-5
-              tracking-[0.16em]
-              sm:tracking-[0.25em]
-              border border-white/40
-              text-white
-              uppercase
-              text-[11px]
-              sm:text-sm
-              backdrop-blur-sm
-              transition
-              duration-500
-              group-hover:border-white
-              group-hover:bg-white
-              group-hover:text-black
-            ">
+            <span
+              className="
+                relative
+                inline-flex
+                max-w-[92vw]
+                justify-center
+                px-3 py-3
+                sm:px-5 sm:py-5
+                tracking-[0.16em]
+                sm:tracking-[0.25em]
+                border border-white/40
+                text-white
+                uppercase
+                text-[11px]
+                sm:text-sm
+                backdrop-blur-sm
+                transition
+                duration-500
+                group-hover:border-white
+                group-hover:bg-white
+                group-hover:text-black
+              "
+            >
               ENTER THE RITUAL
             </span>
-
           </button>
-
         </motion.div>
       </section>
 
       <Navbar />
+
+      {/* ================= Occult Dictionary ================= */}
+      <section id="occult" className="occult-section">
+        <div className="occult-bg-title">ShkheeV MerA</div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="occult-wrap"
+        >
+          <h2 className="occult-title font-semibold" data-text="ShkheeV MerA">
+            ShkheeV MerA
+            <span className="hebrew">(שְׁכִיב מְרַע)</span>
+          </h2>
+
+          <p className="occult-label">Ancient Term — Noun</p>
+
+          <p className="occult-definition">
+            A name whispered for one suspended at the threshold of death — neither living nor gone,
+            <br />
+            but slowly dissolving into the hush beyond breath.
+          </p>
+        </motion.div>
+      </section>
 
       {/* ================= MUSIC ================= */}
 
@@ -140,25 +170,6 @@ export default function Home() {
           </div>
         </div>
       </motion.section>
-
-      {/* ================= PARALLAX BREAK ================= */}
-
-      <section className="relative h-[60vh] min-h-[360px] sm:min-h-[420px] flex items-center justify-center overflow-hidden">
-        
-        <div className="absolute inset-0 bg-black/70" />
-
-        <motion.h2
-          variants={fadeUp80}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="px-4 text-center text-white text-3xl font-black uppercase leading-tight tracking-[0.18em] opacity-80 sm:px-6 sm:text-5xl sm:tracking-widest md:text-7xl"
-        >
-          ONLY THE DYING HEAR OUR CALL.
-          <br />
-          SUFFER.
-        </motion.h2>
-      </section>
 
       {/* ================= EMISSARIES OF DEATH ================= */}
 

@@ -44,7 +44,6 @@ export default function Navbar() {
             ? `
               bg-black/55
               backdrop-blur-2xl
-              border-b border-white/10
               shadow-[0_8px_30px_rgba(0,0,0,0.35)]
             `
             : "bg-transparent"
