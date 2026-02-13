@@ -180,3 +180,21 @@ body::before {
   margin-left: auto;
   margin-right: auto;
 }
+
+@media (max-width: 640px) {
+  .occult-wrap {
+    padding: 2.2rem 1rem;
+  }
+
+  .occult-title {
+    font-size: clamp(2.2rem, 8vw, 3rem);
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+    transform: scale(0.95);
+    transform-origin: center;
+  }
+
+  .occult-title .hebrew {
+    font-size: 0.5em;
+  }
+}
