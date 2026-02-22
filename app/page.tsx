@@ -227,12 +227,12 @@ export default function Page() {
       <div className="max-w-5xl mx-auto px-6 py-20 space-y-24">
         {/* About */}
         <Section id="about" title="Ofir Dror - Senior Software Engineer">
-          <p className="text-slate-400 leading-relaxed">
-            Senior Software Engineer with extensive experience building distributed SaaS platforms,
-            serverless architectures, and enterprise-grade backend systems. Strong expertise in solving
-            complex engineering challenges, improving system performance, and designing resilient production
-            architectures. Proven ability to deliver scalable, maintainable, and business-critical software.
-          </p>
+            <p className="text-slate-400 leading-relaxed text-justify">
+        Senior Software Engineer specializing in distributed SaaS platforms, microservices and serverless architectures, 
+        and enterprise backend systems. Skilled at tackling complex engineering problems, enhancing system performance,
+         and architecting resilient production-grade solutions. Consistently delivers scalable, maintainable,
+          and mission-critical software.
+            </p>
 
           <div className="flex flex-wrap justify-center gap-6 text-xs text-slate-400 mt-6">
             <span className="flex items-center gap-2"><Mail size={14} /> ofirdror7619@gmail.com</span>
@@ -262,7 +262,7 @@ export default function Page() {
         {/* Education */}
         <Section id="education" title="Education">
           <div className="flex items-center gap-4">
-            <GraduationCap className="text-blue-400" />
+            <GraduationCap className="text-blue-400" size={24} />
             <div>
               <h3 className="font-semibold text-white">LL.B in Law</h3>
               <p className="text-sm text-slate-400">Sha'arei Mishpat College – GPA: 91.2</p>
@@ -273,7 +273,7 @@ export default function Page() {
         {/* Military */}
         <Section id="military" title="Military Service">
           <div className="flex items-center gap-4">
-            <Shield className="text-blue-400" />
+            <Shield className="text-blue-400" size={24} />
             <div>
               <h3 className="font-semibold text-white">System Administrator (VAX/VMS)</h3>
               <p className="text-sm text-slate-400">Tel Hashomer Base</p>
