@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Mail,
   Phone,
@@ -15,6 +15,7 @@ import {
   GraduationCap,
   Shield,
   Briefcase,
+  Calendar,
 } from 'lucide-react';
 
 /* ===========================
@@ -33,8 +34,11 @@ function Section({
   return (
     <section id={id} className="space-y-8">
       <h2 className="text-3xl font-bold tracking-tight text-white mb-4 text-center">{title}</h2>
-      <div className="bg-slate-800/60 border border-slate-700 rounded-2xl p-8 space-y-6">
-        {children}
+      <div className="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-8 space-y-6 shadow-2xl shadow-slate-900/20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-slate-900/10 pointer-events-none" />
+        <div className="relative z-10">
+          {children}
+        </div>
       </div>
     </section>
   );
@@ -51,11 +55,31 @@ function ExperienceItem({
   period: string;
   bullets: string[];
 }) {
+  // Function to highlight technologies in bullet text
+  const highlightTechnologies = (text: string) => {
+    const technologies = [
+      'AWS', 'Lambda', 'Step Functions', 'DynamoDB', 'Redis', 'Java', 'Spring Boot', 
+      'Node.js', 'Angular', 'Docker', 'Kubernetes', 'CI/CD', 'Jenkins', 'Copilot', 
+      'Claude', 'Bedrock', 'SaaS', 'APIs', 'microservices'
+    ];
+    
+    let highlightedText = text;
+    technologies.forEach(tech => {
+      const regex = new RegExp(`\\b${tech}\\b`, 'gi');
+      highlightedText = highlightedText.replace(regex, `<span class="text-blue-400 font-medium">${tech}</span>`);
+    });
+    
+    return <span dangerouslySetInnerHTML={{ __html: highlightedText }} />;
+  };
+
   return (
-    <div className="bg-slate-900/60 border border-slate-700 rounded-xl p-6 transition-transform duration-300 hover:-translate-y-1">
+    <div className="bg-slate-900/60 border border-slate-700 rounded-xl p-6">
       <div className="flex items-center justify-between flex-wrap gap-2">
         <h3 className="text-xl font-bold text-white">{title}</h3>
-        <span className="text-sm text-slate-400">{period}</span>
+        <div className="flex items-center gap-1 text-sm text-slate-400">
+          <Calendar size={24} className="text-blue-400" />
+          <span>{period}</span>
+        </div>
       </div>
 
       <div className="flex items-center gap-2 mt-2 mb-4 text-slate-300">
@@ -65,7 +89,7 @@ function ExperienceItem({
 
       <ul className="space-y-2 list-disc list-inside text-slate-300 text-sm leading-relaxed">
         {bullets.map((b, i) => (
-          <li key={i}>{b}</li>
+          <li key={i}>{highlightTechnologies(b)}</li>
         ))}
       </ul>
     </div>
@@ -107,6 +131,48 @@ function SkillCategory({
 
 export default function Page() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('about');
+
+  // Scroll spy to highlight active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['about', 'experience', 'skills', 'education', 'military'];
+      const scrollPosition = window.scrollY + 200;
+      
+      let activeId = 'about';
+      let minDistance = Infinity;
+      
+      // Find the section we're closest to
+      sections.forEach((sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const elementTop = element.offsetTop;
+          const distance = Math.abs(scrollPosition - elementTop);
+          
+          // Give both short sections advantages, but prioritize education
+          let adjustedDistance = distance;
+          if (sectionId === 'education') {
+            adjustedDistance = distance - 250; // Big boost for education
+          }
+          if (sectionId === 'military') {
+            adjustedDistance = distance - 150; // Smaller boost for military
+          }
+          
+          if (adjustedDistance < minDistance && scrollPosition >= elementTop - 250) {
+            minDistance = adjustedDistance;
+            activeId = sectionId;
+          }
+        }
+      });
+      
+      setActiveSection(activeId);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Set initial active section
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const experiences = [
     {
@@ -193,9 +259,11 @@ export default function Page() {
               <a
                 key={id}
                 href={`#${id}`}
-                className="hover:text-blue-400 transition-colors"
+                className={`transition-colors ${
+                  activeSection === id ? 'text-blue-400 font-medium' : 'text-slate-400'
+                }`}
               >
-                {id.charAt(0).toUpperCase() + id.slice(1)}
+                {id === 'skills' ? 'Technical Skills' : id.charAt(0).toUpperCase() + id.slice(1)}
               </a>
             ))}
           </div>
@@ -215,29 +283,31 @@ export default function Page() {
                 key={id}
                 href={`#${id}`}
                 onClick={() => setIsMenuOpen(false)}
-                className="block hover:text-blue-400"
+                className={`block transition-colors ${
+                  activeSection === id ? 'text-blue-400 font-medium' : 'text-slate-400'
+                }`}
               >
-                {id.charAt(0).toUpperCase() + id.slice(1)}
+                {id === 'skills' ? 'Technical Skills' : id.charAt(0).toUpperCase() + id.slice(1)}
               </a>
             ))}
           </div>
         )}
       </nav>
 
-      <div className="max-w-5xl mx-auto px-6 py-20 space-y-24">
+      <div className="max-w-5xl mx-auto px-6 py-24 space-y-24">
         {/* About */}
         <Section id="about" title="Ofir Dror - Senior Software Engineer">
-            <p className="text-slate-400 leading-relaxed text-justify">
-        Senior Software Engineer specializing in distributed SaaS platforms, microservices and serverless architectures, 
-        and enterprise backend systems. Skilled at tackling complex engineering problems, enhancing system performance,
-         and architecting resilient production-grade solutions. Consistently delivers scalable, maintainable,
-          and mission-critical software.
+            <p className="text-slate-300 leading-relaxed text-justify">
+    Senior Software Engineer with extensive experience building large scale, 
+    distributed SaaS platforms using microservices and serverless architectures, and modern cloud technologies.
+     Strong expertise in solving complex engineering challenges, improving system performance, and designing reliable,
+      production grade architectures. Proven ability to deliver scalable, maintainable, and business critical software end to end.
             </p>
 
-          <div className="flex flex-wrap justify-center gap-6 text-xs text-slate-400 mt-6">
-            <span className="flex items-center gap-2"><Mail size={14} /> ofirdror7619@gmail.com</span>
-            <span className="flex items-center gap-2"><Phone size={14} /> 054-7550489</span>
-            <span className="flex items-center gap-2"><MapPin size={14} /> Petah Tikva, Israel</span>
+          <div className="flex flex-wrap justify-center gap-6 text-xs text-slate-300 mt-6">
+            <span className="flex items-center gap-2"><Mail size={24} className="text-blue-400" /> ofirdror7619@gmail.com</span>
+            <span className="flex items-center gap-2"><Phone size={24} className="text-blue-400" /> 054-7550489</span>
+            <span className="flex items-center gap-2"><MapPin size={24} className="text-blue-400" /> Petah Tikva, Israel</span>
           </div>
         </Section>
 
@@ -259,24 +329,26 @@ export default function Page() {
           </div>
         </Section>
 
-        {/* Education */}
-        <Section id="education" title="Education">
-          <div className="flex items-center gap-4">
-            <GraduationCap className="text-blue-400" size={24} />
-            <div>
-              <h3 className="font-semibold text-white">LL.B in Law</h3>
-              <p className="text-sm text-slate-400">Sha'arei Mishpat College – GPA: 91.2</p>
-            </div>
-          </div>
-        </Section>
-
+{/* Education */}
+<Section id="education" title="Education">
+  <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+    <GraduationCap className="text-blue-400" size={24} />
+    <div>
+      <h3 className="font-semibold text-white">LL.B in Law</h3>
+      <p className="text-sm text-slate-400">
+        Sha'arei Mishpat College &middot; GPA 91
+      </p>
+      <p className="text-sm text-blue-400">Licensed Lawyer</p>
+    </div>
+  </div>
+</Section>
         {/* Military */}
         <Section id="military" title="Military Service">
           <div className="flex items-center gap-4">
             <Shield className="text-blue-400" size={24} />
             <div>
               <h3 className="font-semibold text-white">System Administrator (VAX/VMS)</h3>
-              <p className="text-sm text-slate-400">Tel Hashomer Base</p>
+              <p className="text-sm text-slate-300">Tel Hashomer Base</p>
             </div>
           </div>
         </Section>
