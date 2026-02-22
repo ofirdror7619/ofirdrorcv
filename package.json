@@ -1,7 +1,11 @@
 {
-  "name": "shkeev-mera",
+  "name": "ofirdror-cv",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ofirdror7619/ofirdrorcv.git"
+  },
   "scripts": {
     "dev": "set NEXT_TURBOPACK_EXPERIMENTAL_USE_SYSTEM_TLS_CERTS=0 && next dev",
     "build": "next build",
@@ -9,7 +13,8 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "framer-motion": "^12.34.0",
+    "framer-motion": "^12.34.3",
+    "lucide-react": "^0.575.0",
     "next": "^16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
