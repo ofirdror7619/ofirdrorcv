@@ -217,6 +217,25 @@ export default function Page() {
         'Collaborated with international engineering teams across multiple time zones.',
       ],
     },
+    {
+      title: 'QA Analyst',
+      company: 'AT&T',
+      period: '2015 – 2017',
+      bullets: [
+        'Testing Client/Server production systems',
+        'Writing STP/STD documents',
+        'Designing comprehensive test plans',
+      ],
+    },
+    {
+      title: 'QA Analyst',
+      company: 'Retalix',
+      period: '2012 – 2015',
+      bullets: [
+        'Testing POS (Point-of-Sale) systems for international clients',
+        'Writing test documents and acceptance criteria',
+      ],
+    },
   ];
 
   const skillCategories = [
@@ -329,19 +348,20 @@ export default function Page() {
           </div>
         </Section>
 
-{/* Education */}
-<Section id="education" title="Education">
-  <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-    <GraduationCap className="text-blue-400" size={24} />
-    <div>
-      <h3 className="font-semibold text-white">LL.B in Law</h3>
-      <p className="text-sm text-slate-400">
-        Sha'arei Mishpat College &middot; GPA 91
-      </p>
-      <p className="text-sm text-blue-400">Licensed Lawyer</p>
-    </div>
-  </div>
-</Section>
+        {/* Education */}
+        <Section id="education" title="Education">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+            <GraduationCap className="text-blue-400" size={24} />
+            <div>
+              <h3 className="font-semibold text-white">LL.B in Law</h3>
+              <p className="text-sm text-slate-400">
+                Sha'arei Mishpat College &middot; GPA 91
+              </p>
+              <p className="text-sm text-blue-400">Licensed Lawyer</p>
+            </div>
+          </div>
+        </Section>
+
         {/* Military */}
         <Section id="military" title="Military Service">
           <div className="flex items-center gap-4">
