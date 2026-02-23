@@ -69,7 +69,7 @@ function ExperienceItem({
       highlightedText = highlightedText.replace(regex, `<span class="text-blue-400 font-medium">${tech}</span>`);
     });
     
-    return <span dangerouslySetInnerHTML={{ __html: highlightedText }} />;
+ 
   };
 
   return (
@@ -89,7 +89,7 @@ function ExperienceItem({
 
       <ul className="space-y-2 list-disc list-inside text-slate-300 text-sm leading-relaxed">
         {bullets.map((b, i) => (
-          <li key={i}>{highlightTechnologies(b)}</li>
+          <li key={i}>{b}</li>
         ))}
       </ul>
     </div>
@@ -316,7 +316,7 @@ export default function Page() {
       <div className="max-w-5xl mx-auto px-6 py-24 space-y-24">
         {/* About */}
         <Section id="about" title="Ofir Dror - Senior Software Engineer">
-            <p className="text-slate-300 leading-relaxed text-justify">
+            <p className="text-slate-300 leading-relaxed">
             Senior Software Engineer specializing in large-scale distributed SaaS systems,
             microservices and serverless cloud architectures. Expert in designing resilient,
             production-grade backend platforms and delivering scalable, business-critical
