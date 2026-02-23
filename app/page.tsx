@@ -324,7 +324,7 @@ export default function Page() {
             quality engineering and operational thinking into architecture decisions.
             </p>
 
-          <div className="flex flex-wrap justify-center gap-6 text-xs text-slate-300 mt-6">
+          <div className="flex flex-wrap justify-center gap-6 text-slate-300 mt-6">
             <span className="flex items-center gap-2"><Mail size={24} className="text-blue-400" /> ofirdror7619@gmail.com</span>
             <span className="flex items-center gap-2"><Phone size={24} className="text-blue-400" /> 054-7550489</span>
             <span className="flex items-center gap-2"><MapPin size={24} className="text-blue-400" /> Petah Tikva, Israel</span>
