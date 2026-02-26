@@ -181,7 +181,16 @@ const skillCategories = [
     icon: <Brain size={20} className="text-blue-400 -translate-y-px" />,
     skills: ['ChatGPT', 'GitHub Copilot', 'Claude', 'Amazon Bedrock'],
   },
-];
+
+    {
+    title: 'Operating Systems',
+    icon: <Brain size={20} className="text-blue-400 -translate-y-px" />,
+    skills: ['Windows', 'Linux'],
+  },
+].map((category) => ({
+  ...category,
+  skills: [...category.skills].sort((a, b) => a.localeCompare(b)),
+}));
 
 /* ===========================
    Reusable Components
@@ -256,6 +265,8 @@ function getSkillLogoMeta(skill: string): { src: string; className?: string } | 
     'GitHub Copilot': { src: '/icons/githubcopilot.svg', className: 'scale-[0.9]' },
     Claude: { src: '/icons/anthropic.svg', className: 'scale-[0.94]' },
     'Amazon Bedrock': { src: '/icons/aws.svg', className: 'scale-[0.86]' },
+    Windows: { src: '/icons/windows.svg' },
+    Linux: { src: '/icons/linux.svg' },
   };
 
   return logos[skill] ?? null;
