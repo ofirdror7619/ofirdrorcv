@@ -35,7 +35,7 @@
   color: transparent;
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 0.35px rgba(255, 255, 255, 0.35);
-  animation: titleHorizontalShift 2.2s linear infinite;
+  animation: titleHorizontalShift 5s linear infinite;
 }
 
 /* ===========================
