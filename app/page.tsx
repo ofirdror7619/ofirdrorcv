@@ -19,6 +19,59 @@ import {
   Calendar,
 } from 'lucide-react';
 
+const technicalSkills = [
+  'AWS',
+  'AWS Lambda',
+  'Step Functions',
+  'Lambda',
+  'DynamoDB',
+  'PostgreSQL',
+  'MongoDB',
+  'Redis',
+  'TypeScript',
+  'Copilot',
+  'GitHub Copilot',
+  'ChatGPT',
+  'Claude',
+  'Bedrock',
+  'Amazon Bedrock',
+  'Java',
+  'Spring',
+  'Spring Boot',
+  'Node.js',
+  'Angular',
+  'Next.js',
+  'Express',
+  'APIs',
+  'CI/CD',
+  'Docker',
+  'Kubernetes',
+  'Jenkins',
+];
+
+const technicalSkillSet = new Set(technicalSkills.map((skill) => skill.toLowerCase()));
+const technicalSkillRegex = new RegExp(
+  `(${technicalSkills
+    .map((skill) => skill.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    .sort((a, b) => b.length - a.length)
+    .join('|')})`,
+  'gi',
+);
+
+function highlightTechnicalSkills(text: string) {
+  return text.split(technicalSkillRegex).map((part, idx) => {
+    if (technicalSkillSet.has(part.toLowerCase())) {
+      return (
+        <span key={`${part}-${idx}`} className="text-blue-400 font-medium">
+          {part}
+        </span>
+      );
+    }
+
+    return <span key={`text-${idx}`}>{part}</span>;
+  });
+}
+
 /* ===========================
    Reusable Components
 =========================== */
@@ -103,7 +156,7 @@ function ExperienceItem({
 
       <ul className="space-y-2 list-disc list-inside text-slate-300 text-sm leading-relaxed">
         {bullets.map((b, i) => (
-          <li key={i}>{b}</li>
+          <li key={i}>{highlightTechnicalSkills(b)}</li>
         ))}
       </ul>
     </div>
@@ -126,6 +179,7 @@ function SkillCategory({
       'Node.js': { src: '/icons/nodejs.svg', className: 'scale-[0.95]' },
       Angular: { src: '/icons/angular.svg', className: 'scale-[0.9]' },
       'Next.js': { src: '/icons/nextjs.svg' },
+      Spring: { src: '/icons/spring.svg' },
       'Spring Boot': { src: '/icons/springboot.svg' },
       Express: { src: '/icons/express.svg' },
       PostgreSQL: { src: '/icons/postgresql.svg', className: 'scale-[0.92]' },
@@ -188,6 +242,8 @@ function SkillCategory({
 export default function Page() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
+  const aboutSummary =
+    'Senior Software Engineer specializing in large-scale distributed SaaS systems, microservices and serverless cloud architectures. Expert in designing resilient, production-grade backend platforms and delivering scalable, business-critical solutions end-to-end. Background in QA and systems administration, bringing strong quality engineering and operational thinking into architecture decisions.';
 
   // Scroll spy to highlight active section
   useEffect(() => {
@@ -249,7 +305,7 @@ export default function Page() {
       period: '2022 – 2024',
       bullets: [
         'Led full-stack development of a distributed SaaS platform built on microservices architecture.',
-        'Designed and implemented backend services in Java (Spring Boot) and Node.js.',
+        'Designed and implemented backend services in Java (Spring, Spring Boot) and Node.js.',
         'Delivered scalable Angular frontend modules integrated with enterprise APIs.',
         'Built CI/CD pipelines and containerized deployments using Docker and Kubernetes.',
       ],
@@ -303,7 +359,7 @@ export default function Page() {
     {
       title: 'Frameworks',
       icon: <Wrench size={24} className="text-blue-400" />,
-      skills: ['Angular', 'Next.js', 'Spring Boot', 'Express'],
+      skills: ['Angular', 'Next.js', 'Spring', 'Spring Boot', 'Express'],
     },
     {
       title: 'Databases',
@@ -375,13 +431,7 @@ export default function Page() {
           id="about"
           title={<TypewriterTitle text="Ofir Dror - Senior Software Developer" />}
         >
-            <p className="text-slate-300 leading-relaxed">
-            Senior Software Engineer specializing in large-scale distributed SaaS systems,
-            microservices and serverless cloud architectures. Expert in designing resilient,
-            production-grade backend platforms and delivering scalable, business-critical
-            solutions end-to-end. Background in QA and systems administration, bringing strong
-            quality engineering and operational thinking into architecture decisions.
-            </p>
+            <p className="text-slate-300 leading-relaxed">{highlightTechnicalSkills(aboutSummary)}</p>
 
           <div className="flex flex-wrap justify-center gap-6 text-slate-300 mt-6">
             <span className="flex items-center gap-2"><Mail size={24} className="text-blue-400" /> ofirdror7619@gmail.com</span>
