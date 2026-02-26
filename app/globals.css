@@ -9,6 +9,35 @@
   top: 2px;
 }
 
+@keyframes titleHorizontalShift {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.title-color-pulse {
+  display: inline-block;
+  background-image: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #ffffff 35%,
+    #000000 50%,
+    #ffffff 65%,
+    #ffffff 100%
+  );
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.35px rgba(255, 255, 255, 0.35);
+  animation: titleHorizontalShift 2.2s linear infinite;
+}
+
 /* ===========================
    Root Colors and Fonts
 =========================== */

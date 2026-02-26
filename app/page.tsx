@@ -75,34 +75,8 @@ function highlightTechnicalSkills(text: string) {
   });
 }
 
-function TypewriterTitle({ text }: { text: string }) {
-  const [displayedText, setDisplayedText] = useState('');
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
-
-  useEffect(() => {
-    let currentIndex = 0;
-
-    const interval = window.setInterval(() => {
-      currentIndex += 1;
-      setDisplayedText(text.slice(0, currentIndex));
-
-      if (currentIndex >= text.length) {
-        window.clearInterval(interval);
-        setIsTypingComplete(true);
-      }
-    }, 60);
-
-    return () => window.clearInterval(interval);
-  }, [text]);
-
-  return (
-    <>
-      {displayedText}
-      {!isTypingComplete && (
-        <span className="ml-1 inline-block w-[2px] h-9 bg-blue-400 align-[-6px] animate-pulse" />
-      )}
-    </>
-  );
+function AnimatedTitle({ text }: { text: string }) {
+  return <span className="title-color-pulse">{text}</span>;
 }
 
 /* ===========================
@@ -350,7 +324,7 @@ export default function Page() {
       <div className="max-w-[820px] mx-auto px-6 py-32 space-y-28">
         <Section
           id="about"
-          title={<TypewriterTitle text="Ofir Dror - Senior Software Engineer" />}
+          title={<AnimatedTitle text="Ofir Dror - Senior Software Engineer" />}
         >
           <p className="text-lg text-slate-300 leading-relaxed text-center">
             Senior Software Engineer specializing in large-scale distributed SaaS
