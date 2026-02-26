@@ -184,27 +184,27 @@ type Experience = {
 const skillCategories = [
   {
     title: 'Programming',
-    icon: <Code size={20} className="text-blue-400" />,
+    icon: <Code size={20} className="text-blue-400 -translate-y-px" />,
     skills: ['Java', 'TypeScript', 'Node.js'],
   },
   {
     title: 'Frameworks',
-    icon: <Wrench size={20} className="text-blue-400" />,
+    icon: <Wrench size={20} className="text-blue-400 -translate-y-px" />,
     skills: ['Angular', 'Next.js', 'Spring', 'Spring Boot', 'Express'],
   },
   {
     title: 'Databases',
-    icon: <Database size={20} className="text-blue-400" />,
+    icon: <Database size={20} className="text-blue-400 -translate-y-px" />,
     skills: ['PostgreSQL', 'MongoDB', 'DynamoDB', 'Redis'],
   },
   {
     title: 'Cloud & DevOps',
-    icon: <Cloud size={20} className="text-blue-400" />,
+    icon: <Cloud size={20} className="text-blue-400 -translate-y-px" />,
     skills: ['AWS Lambda', 'Step Functions', 'Docker', 'Kubernetes', 'CI/CD', 'Jenkins'],
   },
   {
     title: 'AI Tools',
-    icon: <Brain size={20} className="text-blue-400" />,
+    icon: <Brain size={20} className="text-blue-400 -translate-y-px" />,
     skills: ['ChatGPT', 'GitHub Copilot', 'Claude', 'Amazon Bedrock'],
   },
 ];
@@ -240,13 +240,13 @@ function ExperienceItem({ exp }: { exp: Experience }) {
       <div className="flex justify-between flex-wrap gap-2">
         <h3 className="text-xl font-semibold text-white">{exp.title}</h3>
         <div className="flex items-center gap-2 text-sm text-slate-400">
-          <Calendar size={16} className="text-blue-400" />
+          <Calendar size={18} className="text-blue-400" />
           {exp.period}
         </div>
       </div>
 
       <div className="flex items-center gap-2 mt-3 mb-5 text-slate-300">
-        <Briefcase size={16} className="text-blue-400" />
+        <Briefcase size={22} className="text-blue-400 align-middle" />
         <span className="font-medium">{exp.company}</span>
       </div>
 
@@ -359,15 +359,15 @@ export default function Page() {
 
           <div className="flex flex-wrap justify-center gap-8 pt-6 text-slate-400">
             <span className="flex items-center gap-2 hover:text-white transition">
-              <Mail size={16} className="text-blue-400" />
+              <Mail size={20} className="text-blue-400" />
               ofirdror7619@gmail.com
             </span>
             <span className="flex items-center gap-2 hover:text-white transition">
-              <Phone size={16} className="text-blue-400" />
+              <Phone size={20} className="text-blue-400" />
               054-7550489
             </span>
             <span className="flex items-center gap-2 hover:text-white transition">
-              <MapPin size={16} className="text-blue-400" />
+              <MapPin size={20} className="text-blue-400" />
               Petah Tikva, Israel
             </span>
           </div>
@@ -388,11 +388,13 @@ export default function Page() {
                 key={i}
                 className="bg-slate-950/60 border border-slate-800 rounded-xl p-8 hover:border-slate-700 transition"
               >
-                <div className="flex items-center gap-3 mb-5">
-                  {cat.icon}
-                  <h3 className="text-lg font-semibold text-white">
+                <div className="flex items-center gap-3 mb-5 leading-none">
+                  <span className="flex items-center justify-center h-5 w-5 shrink-0">
+                    {cat.icon}
+                  </span>
+                  <div className="text-lg font-semibold text-white leading-none">
                     {cat.title}
-                  </h3>
+                  </div>
                 </div>
                 <div className="flex flex-wrap gap-3">
                   {cat.skills.map((s, idx) => {
@@ -404,13 +406,13 @@ export default function Page() {
                         className="bg-slate-900 border border-slate-800 rounded-full px-3 py-1 text-sm hover:border-blue-400 transition inline-flex items-center gap-2"
                       >
                         {logo && (
-                          <span className="w-[16px] h-[16px] shrink-0 inline-flex items-center justify-center">
+                          <span className="w-[20px] h-[20px] shrink-0 inline-flex items-center justify-center">
                             <Image
                               src={logo.src}
                               alt={`${s} logo`}
-                              width={16}
-                              height={16}
-                              className={`w-[16px] h-[16px] ${logo.className ?? ''}`}
+                              width={20}
+                              height={20}
+                              className={`w-[20px] h-[20px] skill-icon-align ${logo.className ?? ''}`}
                             />
                           </span>
                         )}
@@ -426,7 +428,7 @@ export default function Page() {
 
         <Section id="education" title="Education">
           <div className="flex items-center gap-4">
-            <GraduationCap className="text-blue-400" size={20} />
+            <GraduationCap className="text-blue-400" size={22} />
             <div>
               <h3 className="font-semibold text-white">LL.B in Law</h3>
               <p className="text-sm text-slate-400 mb-0">
@@ -440,7 +442,7 @@ export default function Page() {
 
         <Section id="military" title="Military Service">
           <div className="flex items-center gap-4">
-            <Shield className="text-blue-400" size={20} />
+            <Shield className="text-blue-400" size={22} />
             <div>
               <h3 className="font-semibold text-white">
                 System Administrator (VAX/VMS)

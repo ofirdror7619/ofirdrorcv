@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
 /* ===========================
+   Custom Icon Alignment
+=========================== */
+.skill-icon-align {
+  vertical-align: middle;
+  position: relative;
+  top: 2px;
+}
+
+/* ===========================
    Root Colors and Fonts
 =========================== */
 :root {
