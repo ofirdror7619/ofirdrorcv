@@ -6,6 +6,7 @@ import {
   Mail,
   Phone,
   MapPin,
+  Linkedin,
   Menu,
   X,
   Code,
@@ -355,6 +356,15 @@ export default function Page() {
               <MapPin size={20} className="text-blue-400" />
               Petah Tikva, Israel
             </span>
+            <a
+              href="https://www.linkedin.com/in/ofir-d-a2a414204"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-white transition"
+            >
+              <Linkedin size={20} className="text-blue-400" />
+              linkedin.com/in/ofir-d-a2a414204
+            </a>
           </div>
         </Section>
 
