@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import {
   Mail,
@@ -28,7 +29,7 @@ function Section({
   children,
 }: {
   id: string;
-  title: string;
+  title: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
@@ -44,6 +45,36 @@ function Section({
   );
 }
 
+function TypewriterTitle({ text }: { text: string }) {
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+
+  useEffect(() => {
+    let currentIndex = 0;
+
+    const interval = window.setInterval(() => {
+      currentIndex += 1;
+      setDisplayedText(text.slice(0, currentIndex));
+
+      if (currentIndex >= text.length) {
+        window.clearInterval(interval);
+        setIsTypingComplete(true);
+      }
+    }, 65);
+
+    return () => window.clearInterval(interval);
+  }, [text]);
+
+  return (
+    <>
+      {displayedText}
+      {!isTypingComplete && (
+        <span className="ml-1 inline-block w-[2px] h-8 bg-blue-400 align-[-6px] animate-pulse" />
+      )}
+    </>
+  );
+}
+
 function ExperienceItem({
   title,
   company,
@@ -55,23 +86,6 @@ function ExperienceItem({
   period: string;
   bullets: string[];
 }) {
-  // Function to highlight technologies in bullet text
-  const highlightTechnologies = (text: string) => {
-    const technologies = [
-      'AWS', 'Lambda', 'Step Functions', 'DynamoDB', 'Redis', 'Java', 'Spring Boot', 
-      'Node.js', 'Angular', 'Docker', 'Kubernetes', 'CI/CD', 'Jenkins', 'Copilot', 
-      'Claude', 'Bedrock', 'SaaS', 'APIs', 'microservices'
-    ];
-    
-    let highlightedText = text;
-    technologies.forEach(tech => {
-      const regex = new RegExp(`\\b${tech}\\b`, 'gi');
-      highlightedText = highlightedText.replace(regex, `<span class="text-blue-400 font-medium">${tech}</span>`);
-    });
-    
- 
-  };
-
   return (
     <div className="bg-slate-900/60 border border-slate-700 rounded-xl p-6">
       <div className="flex items-center justify-between flex-wrap gap-2">
@@ -105,6 +119,33 @@ function SkillCategory({
   title: string;
   skills: string[];
 }) {
+  const getSkillLogoMeta = (skill: string) => {
+    const logos: Record<string, { src: string; className?: string }> = {
+      Java: { src: '/icons/java.svg', className: 'scale-[0.9]' },
+      TypeScript: { src: '/icons/typescript.svg' },
+      'Node.js': { src: '/icons/nodejs.svg', className: 'scale-[0.95]' },
+      Angular: { src: '/icons/angular.svg', className: 'scale-[0.9]' },
+      'Next.js': { src: '/icons/nextjs.svg' },
+      'Spring Boot': { src: '/icons/springboot.svg' },
+      Express: { src: '/icons/express.svg' },
+      PostgreSQL: { src: '/icons/postgresql.svg', className: 'scale-[0.92]' },
+      MongoDB: { src: '/icons/mongodb.svg' },
+      DynamoDB: { src: '/icons/aws.svg', className: 'scale-[0.86]' },
+      Redis: { src: '/icons/redis.svg' },
+      'AWS Lambda': { src: '/icons/aws.svg', className: 'scale-[0.86]' },
+      'Step Functions': { src: '/icons/aws.svg', className: 'scale-[0.86]' },
+      Docker: { src: '/icons/docker.svg' },
+      Kubernetes: { src: '/icons/kubernetes.svg' },
+      Jenkins: { src: '/icons/jenkins.svg', className: 'scale-[0.9]' },
+      ChatGPT: { src: '/icons/openai.svg', className: 'scale-[0.9] rounded-[6px]' },
+      'GitHub Copilot': { src: '/icons/githubcopilot.svg', className: 'scale-[0.9]' },
+      Claude: { src: '/icons/anthropic.svg', className: 'scale-[0.94]' },
+      'Amazon Bedrock': { src: '/icons/aws.svg', className: 'scale-[0.86]' },
+    };
+
+    return logos[skill] ?? null;
+  };
+
   return (
     <div className="bg-slate-900/60 border border-slate-700 rounded-xl p-6 transition-all hover:shadow-lg hover:shadow-slate-900/50">
       <div className="flex items-center gap-3 mb-4 text-slate-300">
@@ -112,14 +153,29 @@ function SkillCategory({
         <h3 className="text-xl font-semibold text-white">{title}</h3>
       </div>
       <div className="flex flex-wrap gap-3">
-        {skills.map((s, idx) => (
-          <span
-            key={idx}
-            className="bg-slate-800/40 border border-slate-700 rounded-full px-3 py-1 text-sm text-slate-200"
-          >
-            {s}
-          </span>
-        ))}
+        {skills.map((s, idx) => {
+          const logo = getSkillLogoMeta(s);
+
+          return (
+            <span
+              key={idx}
+              className="bg-slate-800/40 border border-slate-700 rounded-full px-3 py-1 text-sm text-slate-200 inline-flex items-center gap-2"
+            >
+              {logo && (
+                <span className="w-[18px] h-[18px] shrink-0 inline-flex items-center justify-center">
+                  <Image
+                    src={logo.src}
+                    alt={`${s} logo`}
+                    width={18}
+                    height={18}
+                    className={`w-[18px] h-[18px] ${logo.className ?? ''}`}
+                  />
+                </span>
+              )}
+              {s}
+            </span>
+          );
+        })}
       </div>
     </div>
   );
@@ -315,7 +371,10 @@ export default function Page() {
 
       <div className="max-w-5xl mx-auto px-6 py-24 space-y-24">
         {/* About */}
-        <Section id="about" title="Ofir Dror - Senior Software Engineer">
+        <Section
+          id="about"
+          title={<TypewriterTitle text="Ofir Dror - Senior Software Developer" />}
+        >
             <p className="text-slate-300 leading-relaxed">
             Senior Software Engineer specializing in large-scale distributed SaaS systems,
             microservices and serverless cloud architectures. Expert in designing resilient,
@@ -356,7 +415,7 @@ export default function Page() {
             <div>
               <h3 className="font-semibold text-white">LL.B in Law</h3>
               <p className="text-sm text-slate-400">
-                Sha'arei Mishpat College &middot; GPA 91
+                Sha&apos;arei Mishpat College &middot; GPA 91
               </p>
               <p className="text-sm text-blue-400">Licensed Lawyer</p>
             </div>
