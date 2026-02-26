@@ -313,7 +313,7 @@ export default function Page() {
   }, []);
 
   return (
-    <main className="bg-slate-950 text-slate-200 min-h-screen scroll-smooth">
+    <main className="bg-slate-950 text-slate-200 min-h-screen scroll-smooth [&_h1]:text-slate-100 [&_h2]:text-slate-100 [&_h3]:text-slate-100 [&_h4]:text-slate-100 [&_h5]:text-slate-100 [&_h6]:text-slate-100">
       {/* NAV */}
       <nav className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur border-b border-slate-900">
         <div className="max-w-[820px] mx-auto px-6 py-5 flex justify-between items-center">
@@ -429,10 +429,11 @@ export default function Page() {
             <GraduationCap className="text-blue-400" size={20} />
             <div>
               <h3 className="font-semibold text-white">LL.B in Law</h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-400 mb-0">
                 Sha&apos;arei Mishpat College · GPA 91
+                <br />
+                <span className="text-blue-400">Licensed Lawyer</span>
               </p>
-              <p className="text-sm text-blue-400">Licensed Lawyer</p>
             </div>
           </div>
         </Section>
