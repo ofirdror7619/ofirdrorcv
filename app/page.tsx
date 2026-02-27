@@ -42,6 +42,7 @@ const technicalSkills = [
   'Docker',
   'Kubernetes',
   'Kafka',
+  'MSSQL',
   'Jenkins',
   'ChatGPT',
   'GitHub Copilot',
@@ -63,7 +64,7 @@ function highlightTechnicalSkills(text: string) {
   return text.split(technicalSkillRegex).map((part, i) => {
     if (technicalSkillSet.has(part.toLowerCase())) {
       return (
-        <span key={i} className="text-blue-400 font-medium">
+        <span key={i} className="text-purple-600 font-medium">
           {part}
         </span>
       );
@@ -196,10 +197,10 @@ function Section({
 }) {
   return (
     <section id={id} className="space-y-10 scroll-mt-32">
-      <h2 className="text-4xl font-bold text-white tracking-tight text-center">
+      <h2 className="text-4xl font-bold text-black tracking-tight text-center">
         {title}
       </h2>
-      <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-10 space-y-8">
+      <div className="bg-gray-50 border border-gray-300 rounded-2xl p-10 space-y-8">
         {children}
       </div>
     </section>
@@ -208,21 +209,21 @@ function Section({
 
 function ExperienceItem({ exp }: { exp: Experience }) {
   return (
-    <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-8 hover:border-slate-700 transition">
+    <div className="bg-gray-50 border border-gray-300 rounded-xl p-8 hover:border-gray-400 transition">
       <div className="flex justify-between flex-wrap gap-2">
-        <h3 className="text-xl font-semibold text-white">{exp.title}</h3>
-        <div className="flex items-center gap-2 text-sm text-slate-400">
-          <Calendar size={18} className="text-blue-400" />
+        <h3 className="text-xl font-semibold text-black">{exp.title}</h3>
+        <div className="flex items-center gap-2 text-sm text-gray-500">
+          <Calendar size={18} className="text-purple-600" />
           {exp.period}
         </div>
       </div>
 
-      <div className="flex items-center gap-2 mt-3 mb-5 text-slate-300">
-        <Briefcase size={22} className="text-blue-400 align-middle" />
-        <span className="font-medium text-blue-400">{exp.company}</span>
+      <div className="flex items-center gap-2 mt-3 mb-5 text-gray-400">
+        <Briefcase size={22} className="text-purple-600 align-middle" />
+        <span className="font-medium text-purple-600">{exp.company}</span>
       </div>
 
-      <ul className="space-y-3 list-disc list-inside text-sm text-slate-300 leading-relaxed">
+      <ul className="space-y-3 list-disc list-inside text-sm text-gray-400 leading-relaxed">
         {exp.bullets.map((b: string, i: number) => (
           <li key={i}>{highlightTechnicalSkills(b)}</li>
         ))}
@@ -231,14 +232,14 @@ function ExperienceItem({ exp }: { exp: Experience }) {
       {/* per‑role technology list */}
       {exp.skills && exp.skills.length > 0 && (
         <div className="mt-4">
-          <span className="font-medium text-white">Technologies & Skills:</span>
+          <span className="font-medium text-black">Technologies & Skills:</span>
           <div className="flex flex-wrap gap-2 mt-1">
             {exp.skills.map((s, idx) => {
               const logo = getSkillLogoMeta(s);
               return (
                 <span
                   key={idx}
-                  className="bg-slate-900 border border-slate-800 rounded-full px-3 py-1 text-sm inline-flex items-center gap-1 hover:border-blue-400 hover:bg-blue-400/10 transition"
+                  className="bg-gray-100 border border-gray-300 rounded-full px-3 py-1 text-sm inline-flex items-center gap-1 hover:border-purple-600 hover:bg-purple-100/10 transition"
                 >
                   {logo && (
                     <span className="w-[16px] h-[16px] inline-flex items-center justify-center">
@@ -287,6 +288,7 @@ function getSkillLogoMeta(skill: string): { src: string; className?: string } | 
     Claude: { src: '/icons/anthropic.svg', className: 'scale-[0.94]' },
     'Amazon Bedrock': { src: '/icons/aws.svg', className: 'scale-[0.86]' },
     Kafka: { src: '/icons/kafka.svg', className: 'scale-[0.9] filter brightness-200 contrast-150' },
+    MSSQL: { src: '/icons/mssql.svg', className: 'scale-[0.9] filter brightness-150' },
     Windows: { src: '/icons/windows.svg', className: 'filter brightness-150' },
     Linux: { src: '/icons/linux.svg', className: 'filter brightness-150' },
   };
@@ -320,21 +322,21 @@ export default function Page() {
   }, []);
 
   return (
-    <main className="bg-slate-950 text-slate-200 min-h-screen scroll-smooth [&_h1]:text-slate-100 [&_h2]:text-slate-100 [&_h3]:text-slate-100 [&_h4]:text-slate-100 [&_h5]:text-slate-100 [&_h6]:text-slate-100">
+    <main className="bg-white text-black min-h-screen scroll-smooth [&_h1]:text-black [&_h2]:text-black [&_h3]:text-black [&_h4]:text-black [&_h5]:text-black [&_h6]:text-black">
       {/* NAV */}
-      <nav className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur border-b border-slate-900">
+      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-300">
         <div className="max-w-[820px] mx-auto px-6 py-5 flex justify-between items-center">
-          <span className="font-semibold text-white">Ofir Dror</span>
+          <span className="font-semibold text-black">Ofir Dror</span>
 
           <div className="hidden md:flex gap-8 text-sm">
             {['about', 'experience', 'skills', 'education', 'military'].map((id) => (
               <a
                 key={id}
                 href={`#${id}`}
-                className={`transition hover:text-white ${
+                className={`transition hover:text-purple-600 ${
                   activeSection === id
-                    ? 'text-blue-400 font-medium'
-                    : 'text-slate-400'
+                    ? 'text-purple-600 font-medium'
+                    : 'text-gray-500'
                 }`}
               >
                 {id === 'skills'
@@ -359,31 +361,31 @@ export default function Page() {
           id="about"
           title={<AnimatedTitle text="Ofir Dror - Senior Software Engineer" />}
         >
-          <p className="text-lg text-slate-300 leading-relaxed text-center">
+          <p className="text-lg text-gray-400 leading-relaxed text-center">
             Senior Software Engineer specializing in large-scale distributed SaaS
             systems, microservices and serverless cloud architectures.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-8 pt-6 text-slate-400">
-            <span className="flex items-center gap-2 hover:text-white transition">
-              <Mail size={20} className="text-blue-400" />
+          <div className="flex flex-wrap justify-center gap-8 pt-6 text-gray-500">
+            <span className="flex items-center gap-2 hover:text-purple-600 transition">
+              <Mail size={20} className="text-purple-600" />
               ofirdror7619@gmail.com
             </span>
-            <span className="flex items-center gap-2 hover:text-white transition">
-              <Phone size={20} className="text-blue-400" />
+            <span className="flex items-center gap-2 hover:text-purple-600 transition">
+              <Phone size={20} className="text-purple-600" />
               054-7550489
             </span>
-            <span className="flex items-center gap-2 hover:text-white transition">
-              <MapPin size={20} className="text-blue-400" />
+            <span className="flex items-center gap-2 hover:text-purple-600 transition">
+              <MapPin size={20} className="text-purple-600" />
               Petah Tikva, Israel
             </span>
             <a
               href="https://www.linkedin.com/in/ofir-d-a2a414204"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-white transition"
+              className="flex items-center gap-2 hover:text-purple-600 transition"
             >
-              <Linkedin size={20} className="text-blue-400" />
+              <Linkedin size={20} className="text-purple-600" />
               linkedin.com/in/ofir-d-a2a414204
             </a>
           </div>
@@ -400,13 +402,13 @@ export default function Page() {
 
         <Section id="education" title="Education">
           <div className="flex items-center gap-4">
-            <GraduationCap className="text-blue-400" size={22} />
+            <GraduationCap className="text-purple-600" size={22} />
             <div>
               <h3 className="font-semibold text-white">LL.B in Law</h3>
-              <p className="text-sm text-slate-400 mb-0">
+              <p className="text-sm text-gray-500 mb-0">
                 Sha&apos;arei Mishpat College · GPA 91
                 <br />
-                <span className="text-blue-400">Licensed Lawyer</span>
+                <span className="text-purple-600">Licensed Lawyer</span>
               </p>
             </div>
           </div>
@@ -414,12 +416,12 @@ export default function Page() {
 
         <Section id="military" title="Military Service">
           <div className="flex items-center gap-4">
-            <Shield className="text-blue-400" size={22} />
+            <Shield className="text-purple-600" size={22} />
             <div>
               <h3 className="font-semibold text-white">
                 System Administrator (VAX/VMS)
               </h3>
-              <p className="text-sm text-slate-300">Tel Hashomer Base</p>
+              <p className="text-sm text-gray-400">Tel Hashomer Base</p>
             </div>
           </div>
         </Section>
