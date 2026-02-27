@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Simple stylized database cylinder with MS colors -->
+  <ellipse cx="32" cy="12" rx="24" ry="8" fill="#CC2927" />
+  <rect x="8" y="12" width="48" height="40" fill="#7F7F7F" />
+  <ellipse cx="32" cy="52" rx="24" ry="8" fill="#CC2927" />
+</svg>
