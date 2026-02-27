@@ -9,11 +9,6 @@ import {
   Linkedin,
   Menu,
   X,
-  Code,
-  Database,
-  Cloud,
-  Wrench,
-  Brain,
   GraduationCap,
   Shield,
   Briefcase,
@@ -46,6 +41,7 @@ const technicalSkills = [
   'CI/CD',
   'Docker',
   'Kubernetes',
+  'Kafka',
   'Jenkins',
   'ChatGPT',
   'GitHub Copilot',
@@ -85,19 +81,36 @@ function AnimatedTitle({ text }: { text: string }) {
 =========================== */
 
 const experiences = [
-{
-  title: 'Senior Software Developer',
-  company: 'NICE',
-  period: '2024 – Present',
-  bullets: [
-    'Architect and deliver AWS serverless application components using TypeScript and Node.js, powering mission-critical enterprise workflows at scale.',
-    'Design and implement complex Step Functions and Lambda orchestration to manage distributed, stateful business processes across services.',
-    'Optimize DynamoDB and Redis data layers for high availability, low latency, and horizontal scalability under production load.',
-    'Lead production architecture decisions with strong emphasis on resilience, observability, performance, and long-term maintainability.',
-    'Leverage modern AI engineering tools (GitHub Copilot, Claude, Amazon Bedrock) to accelerate development velocity and elevate code quality standards.',
-    'Built and optimized event-driven workflows using EventBridge, SQS, and SNS, enabling asynchronous processing, improved system resilience, and horizontal scalability across services.',
-  ],
-},
+  {
+    title: 'Senior Software Developer',
+    company: 'NICE',
+    period: '2024 – Present',
+    bullets: [
+      'Architect and deliver AWS serverless application components using TypeScript and Node.js, powering mission-critical enterprise workflows at scale.',
+      'Design and implement complex Step Functions and Lambda orchestration to manage distributed, stateful business processes across services.',
+      'Optimize DynamoDB and Redis data layers for high availability, low latency, and horizontal scalability under production load.',
+      'Lead production architecture decisions with strong emphasis on resilience, observability, performance, and long-term maintainability.',
+      'Leverage modern AI engineering tools (GitHub Copilot, Claude, Amazon Bedrock) to accelerate development velocity and elevate code quality standards.',
+      'Built and optimized event-driven workflows using EventBridge, SQS, and SNS, enabling asynchronous processing, improved system resilience, and horizontal scalability across services.',
+    ],
+    skills: [
+      'Amazon Bedrock',
+      'AWS',
+      'AWS Lambda',
+      'Claude',
+      'DynamoDB',
+      'EventBridge',
+      'GitHub Copilot',
+      'Linux',
+      'Node.js',
+      'Redis',
+      'SQS',
+      'SNS',
+      'Step Functions',
+      'TypeScript',
+      'Windows',
+    ],
+  },
   {
     title: 'Senior Software Developer',
     company: 'Locusview',
@@ -108,6 +121,7 @@ const experiences = [
       'Delivered scalable Angular frontend modules integrated with enterprise APIs.',
       'Built CI/CD pipelines and containerized deployments using Docker and Kubernetes.',
     ],
+    skills: ['Angular', 'CI/CD', 'Docker', 'Java', 'Kafka', 'Kubernetes', 'Linux', 'Node.js', 'PostgreSQL', 'Spring', 'Spring Boot', 'Windows'],
   },
   {
     title: 'Software Developer',
@@ -117,6 +131,7 @@ const experiences = [
       'Developed cybersecurity and firewall automation systems in microservices environments.',
       'Improved service reliability and maintainability across distributed components.',
     ],
+    skills: ['Cybersecurity', 'Java', 'Linux', 'Microservices', 'MongoDB', 'Windows'],
   },
   {
     title: 'Software Developer',
@@ -127,6 +142,7 @@ const experiences = [
       'Designed distributed system components aligned with industry best practices.',
       'Collaborated with international engineering teams across multiple time zones.',
     ],
+    skills: ['Angular', 'Client/Server', 'Distributed Systems', 'Java', 'MSSQL', 'MongoDB', 'PostgreSQL', 'Windows'],
   },
   {
     title: 'QA Analyst',
@@ -137,6 +153,7 @@ const experiences = [
       'Writing STP/STD documentation.',
       'Designing comprehensive test plans.',
     ],
+    skills: ['Documentation', 'Testing'],
   },
   {
     title: 'QA Analyst',
@@ -146,6 +163,7 @@ const experiences = [
       'Testing POS (Point-of-Sale) systems for international clients.',
       'Writing test documents and acceptance criteria.',
     ],
+    skills: ['POS', 'Testing'],
   },
 ];
 
@@ -154,44 +172,14 @@ type Experience = {
   company: string;
   period: string;
   bullets: string[];
+  // list of technologies/tools used in this role (rendered under the bullets)
+  skills?: string[];
 };
 
-const skillCategories = [
-  {
-    title: 'Programming',
-    icon: <Code size={20} className="text-blue-400 -translate-y-px" />,
-    skills: ['Java', 'TypeScript', 'Node.js'],
-  },
-  {
-    title: 'Frameworks',
-    icon: <Wrench size={20} className="text-blue-400 -translate-y-px" />,
-    skills: ['Angular', 'Next.js', 'Spring', 'Spring Boot', 'Express'],
-  },
-  {
-    title: 'Databases',
-    icon: <Database size={20} className="text-blue-400 -translate-y-px" />,
-    skills: ['PostgreSQL', 'MongoDB', 'DynamoDB', 'Redis'],
-  },
-  {
-    title: 'Cloud & DevOps',
-    icon: <Cloud size={20} className="text-blue-400 -translate-y-px" />,
-    skills: ['AWS Lambda', 'Step Functions', 'Docker', 'Kubernetes', 'CI/CD', 'Jenkins'],
-  },
-  {
-    title: 'AI Tools',
-    icon: <Brain size={20} className="text-blue-400 -translate-y-px" />,
-    skills: ['ChatGPT', 'GitHub Copilot', 'Claude', 'Amazon Bedrock'],
-  },
+// NOTE: the standalone "Technical Skills" matrix has been removed in favor of
+// listing skills directly within each experience entry.  Keep the helper
+// `getSkillLogoMeta` around in case we want to render logos later.
 
-    {
-    title: 'Operating Systems',
-    icon: <Brain size={20} className="text-blue-400 -translate-y-px" />,
-    skills: ['Windows', 'Linux'],
-  },
-].map((category) => ({
-  ...category,
-  skills: [...category.skills].sort((a, b) => a.localeCompare(b)),
-}));
 
 /* ===========================
    Reusable Components
@@ -231,7 +219,7 @@ function ExperienceItem({ exp }: { exp: Experience }) {
 
       <div className="flex items-center gap-2 mt-3 mb-5 text-slate-300">
         <Briefcase size={22} className="text-blue-400 align-middle" />
-        <span className="font-medium">{exp.company}</span>
+        <span className="font-medium text-blue-400">{exp.company}</span>
       </div>
 
       <ul className="space-y-3 list-disc list-inside text-sm text-slate-300 leading-relaxed">
@@ -239,6 +227,37 @@ function ExperienceItem({ exp }: { exp: Experience }) {
           <li key={i}>{highlightTechnicalSkills(b)}</li>
         ))}
       </ul>
+
+      {/* per‑role technology list */}
+      {exp.skills && exp.skills.length > 0 && (
+        <div className="mt-4">
+          <span className="font-medium text-white">Technologies & Skills:</span>
+          <div className="flex flex-wrap gap-2 mt-1">
+            {exp.skills.map((s, idx) => {
+              const logo = getSkillLogoMeta(s);
+              return (
+                <span
+                  key={idx}
+                  className="bg-slate-900 border border-slate-800 rounded-full px-3 py-1 text-sm inline-flex items-center gap-1 hover:border-blue-400 hover:bg-blue-400/10 transition"
+                >
+                  {logo && (
+                    <span className="w-[16px] h-[16px] inline-flex items-center justify-center">
+                      <Image
+                        src={logo.src}
+                        alt={`${s} icon`}
+                        width={16}
+                        height={16}
+                        className={`${logo.className ?? ''}`}
+                      />
+                    </span>
+                  )}
+                  {s}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -247,6 +266,7 @@ function getSkillLogoMeta(skill: string): { src: string; className?: string } | 
   const logos: Record<string, { src: string; className?: string }> = {
     Java: { src: '/icons/java.svg', className: 'scale-[0.9]' },
     TypeScript: { src: '/icons/typescript.svg' },
+    AWS: { src: '/icons/aws.svg', className: 'scale-[0.86] filter brightness-150' },
     'Node.js': { src: '/icons/nodejs.svg', className: 'scale-[0.95]' },
     Angular: { src: '/icons/angular.svg', className: 'scale-[0.9]' },
     'Next.js': { src: '/icons/nextjs.svg' },
@@ -255,10 +275,10 @@ function getSkillLogoMeta(skill: string): { src: string; className?: string } | 
     Express: { src: '/icons/express.svg' },
     PostgreSQL: { src: '/icons/postgresql.svg', className: 'scale-[0.92]' },
     MongoDB: { src: '/icons/mongodb.svg' },
-    DynamoDB: { src: '/icons/aws.svg', className: 'scale-[0.86]' },
+    DynamoDB: { src: '/icons/aws.svg', className: 'scale-[0.86] filter brightness-150' },
     Redis: { src: '/icons/redis.svg' },
-    'AWS Lambda': { src: '/icons/aws.svg', className: 'scale-[0.86]' },
-    'Step Functions': { src: '/icons/aws.svg', className: 'scale-[0.86]' },
+    'AWS Lambda': { src: '/icons/aws.svg', className: 'scale-[0.86] filter brightness-150' },
+    'Step Functions': { src: '/icons/aws.svg', className: 'scale-[0.86] filter brightness-150' },
     Docker: { src: '/icons/docker.svg' },
     Kubernetes: { src: '/icons/kubernetes.svg' },
     Jenkins: { src: '/icons/jenkins.svg', className: 'scale-[0.9]' },
@@ -266,8 +286,9 @@ function getSkillLogoMeta(skill: string): { src: string; className?: string } | 
     'GitHub Copilot': { src: '/icons/githubcopilot.svg', className: 'scale-[0.9]' },
     Claude: { src: '/icons/anthropic.svg', className: 'scale-[0.94]' },
     'Amazon Bedrock': { src: '/icons/aws.svg', className: 'scale-[0.86]' },
-    Windows: { src: '/icons/windows.svg' },
-    Linux: { src: '/icons/linux.svg' },
+    Kafka: { src: '/icons/kafka.svg', className: 'scale-[0.9] filter brightness-200 contrast-150' },
+    Windows: { src: '/icons/windows.svg', className: 'filter brightness-150' },
+    Linux: { src: '/icons/linux.svg', className: 'filter brightness-150' },
   };
 
   return logos[skill] ?? null;
@@ -376,50 +397,6 @@ export default function Page() {
           </div>
         </Section>
 
-        <Section id="skills" title="Technical Skills">
-          <div className="grid md:grid-cols-2 gap-8">
-            {skillCategories.map((cat, i) => (
-              <div
-                key={i}
-                className="bg-slate-950/60 border border-slate-800 rounded-xl p-8 hover:border-slate-700 transition"
-              >
-                <div className="flex items-center gap-3 mb-5 leading-none">
-                  <span className="flex items-center justify-center h-5 w-5 shrink-0">
-                    {cat.icon}
-                  </span>
-                  <div className="text-lg font-semibold text-white leading-none">
-                    {cat.title}
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  {cat.skills.map((s, idx) => {
-                    const logo = getSkillLogoMeta(s);
-
-                    return (
-                      <span
-                        key={idx}
-                        className="bg-slate-900 border border-slate-800 rounded-full px-3 py-1 text-sm hover:border-blue-400 transition inline-flex items-center gap-2"
-                      >
-                        {logo && (
-                          <span className="w-[20px] h-[20px] shrink-0 inline-flex items-center justify-center">
-                            <Image
-                              src={logo.src}
-                              alt={`${s} logo`}
-                              width={20}
-                              height={20}
-                              className={`w-[20px] h-[20px] skill-icon-align ${logo.className ?? ''}`}
-                            />
-                          </span>
-                        )}
-                        {s}
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Section>
 
         <Section id="education" title="Education">
           <div className="flex items-center gap-4">
