@@ -21,6 +21,13 @@ export default function Page() {
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  };
+
   useEffect(() => {
     const handleMouse = (e: MouseEvent) => {
       setMouse({ x: e.clientX, y: e.clientY });
@@ -47,10 +54,10 @@ export default function Page() {
       />
 
       <nav className="navbar">
-        <a className="nav-link" href="#about">About</a>
-        <a className="nav-link" href="#experience">Experience</a>
-        <a className="nav-link" href="#education">Education</a>
-        <a className="nav-link" href="#military">Military</a>
+        <button type="button" className="nav-link" onClick={() => scrollToSection('about')}>About</button>
+        <button type="button" className="nav-link" onClick={() => scrollToSection('experience')}>Experience</button>
+        <button type="button" className="nav-link" onClick={() => scrollToSection('education')}>Education</button>
+        <button type="button" className="nav-link" onClick={() => scrollToSection('military')}>Military</button>
       </nav>
 
       <main className="page">
