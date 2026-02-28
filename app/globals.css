@@ -53,6 +53,10 @@ body {
   padding: 120px 24px 100px;
 }
 
+[id] {
+  scroll-margin-top: 90px;
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -120,7 +124,7 @@ body {
 }
 
 .name {
-  font-size: 82px;
+  font-size: clamp(46px, 8vw, 82px);
   font-weight: 800;
   margin: 0;
   line-height: 1.02;
@@ -302,4 +306,169 @@ body {
 
 @keyframes blink {
   50% { opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 110px 18px 72px;
+  }
+
+  .navbar {
+    gap: 16px;
+    padding: 10px 8px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+  }
+
+  .status-bar {
+    margin-bottom: 36px;
+  }
+
+  .headline {
+    font-size: 19px;
+  }
+
+  .section-title {
+    font-size: 22px;
+  }
+
+  .timeline {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 102px 14px 56px;
+  }
+
+  .navbar {
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 10px 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .navbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+    font-size: 12px;
+  }
+
+  .hero {
+    margin-bottom: 26px;
+  }
+
+  .name {
+    line-height: 1.04;
+  }
+
+  .name-role {
+    font-size: 0.5em;
+  }
+
+  .headline {
+    margin-top: 14px;
+    font-size: 16px;
+  }
+
+  .contact {
+    margin-top: 18px;
+    gap: 10px;
+    font-size: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section {
+    margin-bottom: 42px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    margin: 0 0 14px;
+  }
+
+  .timeline {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .timeline h3 {
+    font-size: 18px;
+  }
+
+  .timeline ul {
+    padding-left: 16px;
+  }
+
+  .timeline-tech {
+    gap: 8px;
+    margin: 0 0 10px;
+  }
+
+  .tech-chip {
+    font-size: 11px;
+    padding: 4px 8px;
+    line-height: 1.25;
+  }
+
+  .terminal {
+    width: calc(100vw - 24px);
+    right: 12px;
+    bottom: 12px;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 390px) {
+  .page {
+    padding: 98px 10px 44px;
+  }
+
+  .navbar {
+    gap: 10px;
+    padding: 9px 10px;
+  }
+
+  .nav-link {
+    font-size: 11px;
+  }
+
+  .status-bar {
+    font-size: 12px;
+    margin-bottom: 26px;
+  }
+
+  .headline {
+    font-size: 15px;
+  }
+
+  .contact {
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .timeline {
+    padding: 14px;
+  }
+
+  .timeline h3 {
+    font-size: 17px;
+  }
+
+  .tech-chip {
+    font-size: 10px;
+    padding: 3px 7px;
+  }
 }
