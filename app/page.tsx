@@ -154,7 +154,7 @@ export { profile, services, architecture, executePipeline };`}
 
           {/* NICE */}
           <div className="timeline">
-            <h3>Senior Software Developer</h3>
+            <h3>Senior Software Engineer</h3>
             <span className="date">2024 — Present</span>
             <p className="company">NICE</p>
             <ul>
@@ -176,7 +176,7 @@ export { profile, services, architecture, executePipeline };`}
 
           {/* Locusview */}
           <div className="timeline">
-            <h3>Senior Software Developer</h3>
+            <h3>Senior Software Engineer</h3>
             <span className="date">2022 — 2024</span>
             <p className="company">Locusview</p>
             <ul>
@@ -196,7 +196,7 @@ export { profile, services, architecture, executePipeline };`}
 
           {/* Algosec */}
           <div className="timeline">
-            <h3>Software Developer</h3>
+            <h3>Software Engineer</h3>
             <span className="date">2020 — 2022</span>
             <p className="company">Algosec</p>
             <ul>
@@ -213,7 +213,7 @@ export { profile, services, architecture, executePipeline };`}
 
           {/* AT&T */}
           <div className="timeline">
-            <h3>Software Developer</h3>
+            <h3>Software Engineer</h3>
             <span className="date">2017 — 2020</span>
             <p className="company">AT&T</p>
             <ul>
@@ -266,12 +266,13 @@ export { profile, services, architecture, executePipeline };`}
         <section id="skills" className="section">
           <h2 className="section-title"><Cpu size={16} /> Skills</h2>
           <div className="metrics-grid">
-            <MetricBar icon={<Terminal size={14} />} label="Backend & APIs" value={100} detail="Node.js · TypeScript · Java · Spring" />
-            <MetricBar icon={<Cloud size={14} />} label="Cloud & Serverless" value={100} detail="AWS Lambda · Step Functions · EventBridge" />
+            <MetricBar icon={<Terminal size={14} />} label="Languages & Frameworks" value={100} detail="Node.js · TypeScript · Java · Angular · Next.js · Spring" />
+            <MetricBar icon={<Cloud size={14} />} label="Cloud & Serverless" value={100} detail="AWS Lambdas · Step Functions · EventBridge · SQS · SNS" />
             <MetricBar icon={<Server size={14} />} label="Databases" value={100} detail="DynamoDB · PostgreSQL · MongoDB · Redis" />
             <MetricBar icon={<Cpu size={14} />} label="Architecture" value={100} detail="Distributed SaaS · Microservices · Scalability" />
-            <MetricBar icon={<Activity size={14} />} label="Reliability" value={100} detail="Observability · Production Stability · Incident Response" />
-            <MetricBar icon={<Zap size={14} />} label="AI Productivity" value={100} detail="Copilot · Claude · Bedrock-assisted delivery" />
+            <MetricBar icon={<Cpu size={14} />} label="Architecture" value={100} detail="Distributed SaaS · Microservices · Scalability" />
+            <MetricBar icon={<Activity size={14} />} label="Tools" value={100} detail="Docker · Kubernetes · Jenkins · Github" />
+            <MetricBar icon={<Zap size={14} />} label="AI Productivity" value={100} detail="Github Copilot · Claude · AWS Bedrock" />
           </div>
         </section>
 
@@ -290,7 +291,7 @@ export { profile, services, architecture, executePipeline };`}
         <section id="military" className="section">
           <h2 className="section-title"><Shield size={16} /> Military Experience</h2>
           <div className="timeline">
-            <h3>Systems Administrator & Software Developer</h3>
+            <h3>Systems Administrator & Software Engineer</h3>
             <p className="company">Israel Defense Forces</p>
             <ul>
               <li>Administered systems and network infrastructure.</li>
