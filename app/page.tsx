@@ -1,430 +1,245 @@
 'use client';
 
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import {
   Mail,
   Phone,
   MapPin,
+  Github,
   Linkedin,
-  Menu,
-  X,
-  GraduationCap,
+  Cpu,
+  Server,
+  Cloud,
+  Terminal,
+  Activity,
+  Book,
   Shield,
-  Briefcase,
-  Calendar,
+  Zap,
 } from 'lucide-react';
 
-/* ===========================
-   Technical Skill Highlighting
-=========================== */
-
-const technicalSkills = [
-  'AWS',
-  'AWS Lambda',
-  'Step Functions',
-  'EventBridge',
-  'SQS',
-  'SNS',
-  'DynamoDB',
-  'PostgreSQL',
-  'MongoDB',
-  'Redis',
-  'TypeScript',
-  'Java',
-  'Spring',
-  'Spring Boot',
-  'Node.js',
-  'Angular',
-  'Next.js',
-  'Express',
-  'CI/CD',
-  'Docker',
-  'Kubernetes',
-  'Kafka',
-  'MSSQL',
-  'Jenkins',
-  'ChatGPT',
-  'GitHub Copilot',
-  'Claude',
-  'Amazon Bedrock',
-];
-
-const technicalSkillSet = new Set(technicalSkills.map((s) => s.toLowerCase()));
-
-const technicalSkillRegex = new RegExp(
-  `(${technicalSkills
-    .map((s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
-    .sort((a, b) => b.length - a.length)
-    .join('|')})`,
-  'gi'
-);
-
-function highlightTechnicalSkills(text: string) {
-  return text.split(technicalSkillRegex).map((part, i) => {
-    if (technicalSkillSet.has(part.toLowerCase())) {
-      return (
-        <span key={i} className="text-purple-600 font-medium">
-          {part}
-        </span>
-      );
-    }
-    return <span key={i}>{part}</span>;
-  });
-}
-
-function AnimatedTitle({ text }: { text: string }) {
-  return <span className="title-color-pulse">{text}</span>;
-}
-
-/* ===========================
-   Data
-=========================== */
-
-const experiences = [
-  {
-    title: 'Senior Software Engineer',
-    company: 'NICE',
-    period: '2024 – Present',
-    bullets: [
-      'Architect and deliver AWS serverless application components using TypeScript and Node.js, powering mission-critical enterprise workflows at scale.',
-      'Design and implement complex Step Functions and Lambda orchestration to manage distributed, stateful business processes across services.',
-      'Optimize DynamoDB and Redis data layers for high availability, low latency, and horizontal scalability under production load.',
-      'Lead production architecture decisions with strong emphasis on resilience, observability, performance, and long-term maintainability.',
-      'Leverage modern AI engineering tools (GitHub Copilot, Claude, Amazon Bedrock) to accelerate development velocity and elevate code quality standards.',
-      'Built and optimized event-driven workflows using EventBridge, SQS, and SNS, enabling asynchronous processing, improved system resilience, and horizontal scalability across services.',
-    ],
-    skills: [
-      'Amazon Bedrock',
-      'AWS',
-      'AWS Lambda',
-      'Claude',
-      'DynamoDB',
-      'EventBridge',
-      'GitHub Copilot',
-      'Linux',
-      'Node.js',
-      'Redis',
-      'SQS',
-      'SNS',
-      'Step Functions',
-      'TypeScript',
-      'Windows',
-    ],
-  },
-  {
-    title: 'Senior Software Engineer',
-    company: 'Locusview',
-    period: '2022 – 2024',
-    bullets: [
-      'Led full-stack development of a distributed SaaS platform built on microservices architecture.',
-      'Designed and implemented backend services in Java (Spring, Spring Boot) and Node.js.',
-      'Delivered scalable Angular frontend modules integrated with enterprise APIs.',
-      'Built CI/CD pipelines and containerized deployments using Docker and Kubernetes.',
-    ],
-    skills: ['Angular', 'CI/CD', 'Docker', 'Java', 'Kafka', 'Kubernetes', 'Linux', 'Node.js', 'PostgreSQL', 'Spring', 'Spring Boot', 'Windows'],
-  },
-  {
-    title: 'Software Engineer',
-    company: 'Algosec',
-    period: '2020 – 2022',
-    bullets: [
-      'Developed cybersecurity and firewall automation systems in microservices environments.',
-      'Improved service reliability and maintainability across distributed components.',
-    ],
-    skills: ['Cybersecurity', 'Java', 'Linux', 'Microservices', 'MongoDB', 'Windows'],
-  },
-  {
-    title: 'Software Engineer',
-    company: 'AT&T',
-    period: '2017 – 2020',
-    bullets: [
-      'Built large-scale production systems serving U.S. enterprise customers.',
-      'Designed distributed system components aligned with industry best practices.',
-      'Collaborated with international engineering teams across multiple time zones.',
-    ],
-    skills: ['Angular', 'Client/Server', 'Distributed Systems', 'Java', 'MSSQL', 'MongoDB', 'PostgreSQL', 'Windows'],
-  },
-  {
-    title: 'QA Analyst',
-    company: 'AT&T',
-    period: '2015 – 2017',
-    bullets: [
-      'Testing Client/Server production systems.',
-      'Writing STP/STD documentation.',
-      'Designing comprehensive test plans.',
-    ],
-    skills: ['Documentation', 'Testing'],
-  },
-  {
-    title: 'QA Analyst',
-    company: 'Retalix',
-    period: '2012 – 2015',
-    bullets: [
-      'Testing POS (Point-of-Sale) systems for international clients.',
-      'Writing test documents and acceptance criteria.',
-    ],
-    skills: ['POS', 'Testing'],
-  },
-];
-
-type Experience = {
-  title: string;
-  company: string;
-  period: string;
-  bullets: string[];
-  // list of technologies/tools used in this role (rendered under the bullets)
-  skills?: string[];
-};
-
-// NOTE: the standalone "Technical Skills" matrix has been removed in favor of
-// listing skills directly within each experience entry.  Keep the helper
-// `getSkillLogoMeta` around in case we want to render logos later.
-
-
-/* ===========================
-   Reusable Components
-=========================== */
-
-function Section({
-  id,
-  title,
-  children,
-}: {
-  id: string;
-  title: React.ReactNode;
-  children: React.ReactNode;
-}) {
-  return (
-    <section id={id} className="space-y-10 scroll-mt-32">
-      <h2 className="text-4xl font-bold text-black tracking-tight text-center">
-        {title}
-      </h2>
-      <div className="bg-gray-50 border border-gray-300 rounded-2xl p-10 space-y-8 card-3d">
-        {children}
-      </div>
-    </section>
-  );
-}
-
-function ExperienceItem({ exp }: { exp: Experience }) {
-  return (
-    <div className="bg-gray-50 border border-gray-300 rounded-xl p-8 card-3d hover:border-gray-400 transition">
-      <div className="flex justify-between flex-wrap gap-2">
-        <h3 className="text-xl font-semibold text-black">{exp.title}</h3>
-        <div className="flex items-center gap-2 text-sm text-black">
-          <Calendar size={18} className="text-black" />
-          {exp.period}
-        </div>
-      </div>
-
-      <div className="flex items-center gap-2 mt-3 mb-5 text-black">
-        <Briefcase size={22} className="text-black align-middle" />
-        <span className="font-bold text-purple-600">{exp.company}</span>
-      </div>
-
-      <ul className="space-y-3 list-disc list-inside text-lg text-black leading-relaxed">
-        {exp.bullets.map((b: string, i: number) => (
-          <li key={i}>{highlightTechnicalSkills(b)}</li>
-        ))}
-      </ul>
-
-      {/* per‑role technology list */}
-      {exp.skills && exp.skills.length > 0 && (
-        <div className="mt-4">
-          <span className="font-medium text-black">Technologies & Skills:</span>
-          <div className="flex flex-wrap gap-2 mt-1">
-            {exp.skills.map((s, idx) => {
-              const logo = getSkillLogoMeta(s);
-              return (
-                <span
-                  key={idx}
-                  className="bg-gray-100 border border-gray-300 rounded-full px-3 py-1 text-base inline-flex items-center gap-1 hover:border-purple-600 hover:bg-purple-100/10 transition"
-                >
-                  {logo && (
-                    <span className="w-[16px] h-[16px] inline-flex items-center justify-center">
-                      <Image
-                        src={logo.src}
-                        alt={`${s} icon`}
-                        width={16}
-                        height={16}
-                        className={`${logo.className ?? ''}`}
-                      />
-                    </span>
-                  )}
-                  {s}
-                </span>
-              );
-            })}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function getSkillLogoMeta(skill: string): { src: string; className?: string } | null {
-  const logos: Record<string, { src: string; className?: string }> = {
-    Java: { src: '/icons/java.svg', className: 'scale-[0.9] filter brightness-150 contrast-125' },
-    TypeScript: { src: '/icons/typescript.svg' },
-    AWS: { src: '/icons/aws.svg', className: 'scale-[0.86] filter brightness-200 contrast-125' },
-    'Node.js': { src: '/icons/nodejs.svg', className: 'scale-[0.95]' },
-    Angular: { src: '/icons/angular.svg', className: 'scale-[0.9] filter brightness-200 contrast-125' },
-    'Next.js': { src: '/icons/nextjs.svg' },
-    Spring: { src: '/icons/spring.svg' },
-    'Spring Boot': { src: '/icons/springboot.svg' },
-    Express: { src: '/icons/express.svg' },
-    PostgreSQL: { src: '/icons/postgresql.svg', className: 'scale-[0.92] filter brightness-200 contrast-125' },
-    MongoDB: { src: '/icons/mongodb.svg' },
-    DynamoDB: { src: '/icons/aws.svg', className: 'scale-[0.86] filter brightness-200 contrast-125' },
-    Redis: { src: '/icons/redis.svg' },
-    'AWS Lambda': { src: '/icons/aws.svg', className: 'scale-[0.86] filter brightness-200 contrast-125' },
-    'Step Functions': { src: '/icons/aws.svg', className: 'scale-[0.86] filter brightness-200 contrast-125' },
-    Docker: { src: '/icons/docker.svg' },
-    Kubernetes: { src: '/icons/kubernetes.svg' },
-    Jenkins: { src: '/icons/jenkins.svg', className: 'scale-[0.9]' },
-    ChatGPT: { src: '/icons/openai.svg', className: 'scale-[0.9] rounded-[6px]' },
-    'GitHub Copilot': { src: '/icons/githubcopilot.svg', className: 'scale-[0.9]' },
-    Claude: { src: '/icons/anthropic.svg', className: 'scale-[0.94]' },
-    'Amazon Bedrock': { src: '/icons/aws.svg', className: 'scale-[0.86] filter brightness-200 contrast-125' },
-    Kafka: { src: '/icons/kafka.svg', className: 'scale-[0.9] filter brightness-200 contrast-150' },
-    MSSQL: { src: '/icons/mssql.svg', className: 'scale-[0.9] filter brightness-150' },
-    Windows: { src: '/icons/windows.svg', className: 'filter brightness-150' },
-    Linux: { src: '/icons/linux.svg', className: 'filter brightness-150' },
-  };
-
-  return logos[skill] ?? null;
-}
-
-/* ===========================
-   Page
-=========================== */
-
 export default function Page() {
-  const [activeSection, setActiveSection] = useState('about');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [terminalOpen, setTerminalOpen] = useState(false);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['about', 'experience', 'skills', 'education', 'military'];
-      const scrollPosition = window.scrollY + 200;
-
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el && scrollPosition >= el.offsetTop) {
-          setActiveSection(id);
-        }
-      }
+    const handleMouse = (e: MouseEvent) => {
+      setMouse({ x: e.clientX, y: e.clientY });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === '~') setTerminalOpen(prev => !prev);
+    };
+
+    window.addEventListener('mousemove', handleMouse);
+    window.addEventListener('keydown', handleKey);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouse);
+      window.removeEventListener('keydown', handleKey);
+    };
   }, []);
 
   return (
-    <main className="bg-white text-black min-h-screen scroll-smooth [&_h1]:text-black [&_h2]:text-black [&_h3]:text-black [&_h4]:text-black [&_h5]:text-black [&_h6]:text-black">
-      {/* NAV */}
-      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-300">
-        <div className="max-w-[820px] mx-auto px-6 py-5 flex justify-between items-center">
-          <span className="font-bold text-black text-lg">Ofir Dror</span>
+    <>
+      <div
+        className="spotlight"
+        style={{ left: mouse.x - 250, top: mouse.y - 250 }}
+      />
 
-          <div className="hidden md:flex gap-8 text-base">
-            {['about', 'experience', 'skills', 'education', 'military'].map((id) => {
-              const label = id === 'skills' ? 'Technical Skills' : id.charAt(0).toUpperCase() + id.slice(1);
-              const isActive = activeSection === id;
-              return (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  className={`relative inline-block group transition ${isActive ? 'text-purple-600 font-medium' : 'text-black'}`}
-                >
-                  <span className="pointer-events-none">{label}</span>
-                  <span
-                    className={`absolute left-0 right-0 -bottom-1 h-0.5 bg-purple-600 transform ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'} transition-transform duration-300 origin-center`}
-                  />
-                </a>
-              );
-            })}
-          </div>
-
-          <button
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
+      <nav className="navbar">
+        <a className="nav-link" href="#about">About</a>
+        <a className="nav-link" href="#experience">Experience</a>
+        <a className="nav-link" href="#education">Education</a>
+        <a className="nav-link" href="#military">Military</a>
       </nav>
 
-      {/* CONTENT */}
-      <div className="max-w-[820px] mx-auto px-6 py-32 space-y-28">
-        <Section
-          id="about"
-          title={<AnimatedTitle text="Ofir Dror - Senior Software Engineer" />}
-        >
-          <p className="text-lg text-black leading-relaxed text-center">
-            Senior Software Engineer specializing in large-scale distributed SaaS
-            systems, microservices and serverless cloud architectures.
+      <main className="page">
+
+        <div className="status-bar">
+          <div>
+            <Activity size={14} /> Status: <span>Ready for challenges</span>
+          </div>
+        </div>
+
+        {/* HERO */}
+        <section id="about" className="hero">
+          <motion.h1
+            initial={{ opacity: 0, y: 80 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="name"
+          >
+            <span className="name-main">Ofir Dror</span>
+            <span className="name-role">Senior Software Engineer</span>
+          </motion.h1>
+
+          <p className="headline">
+            Senior Software Engineer specializing in large-scale distributed SaaS systems,
+            microservices and serverless cloud architectures.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-8 pt-6 text-black">
-            <span className="flex items-center gap-2 hover:text-purple-600 transition">
-              <Mail size={20} className="text-purple-600" />
-              ofirdror7619@gmail.com
-            </span>
-            <span className="flex items-center gap-2 hover:text-purple-600 transition">
-              <Phone size={20} className="text-purple-600" />
-              054-7550489
-            </span>
-            <span className="flex items-center gap-2 hover:text-purple-600 transition">
-              <MapPin size={20} className="text-purple-600" />
-              Petah Tikva, Israel
-            </span>
-            <a
-              href="https://www.linkedin.com/in/ofir-d-a2a414204"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-purple-600 transition"
-            >
-              <Linkedin size={20} className="text-purple-600" />
-              linkedin.com/in/ofir-d-a2a414204
+          <div className="contact">
+            <span><Mail size={14} /> ofirdror7619@gmail.com</span>
+            <span><Phone size={14} /> 054-7550489</span>
+            <span><MapPin size={14} /> Petah Tikva, Israel</span>
+            <a href="https://linkedin.com/in/ofir-d-a2a414204" target="_blank" rel="noreferrer">
+              <Linkedin size={14} /> linkedin.com/in/ofir-d-a2a414204
             </a>
           </div>
-        </Section>
+        </section>
 
-        <Section id="experience" title="Professional Experience">
-          <div className="space-y-8">
-            {experiences.map((exp, i) => (
-              <ExperienceItem key={i} exp={exp} />
-            ))}
-          </div>
-        </Section>
+        {/* EXPERIENCE */}
+        <section id="experience" className="section">
+          <h2 className="section-title"><Terminal size={16} /> Professional Experience</h2>
 
-
-        <Section id="education" title="Education">
-          <div className="flex items-center gap-4">
-            <GraduationCap className="text-purple-600" size={22} />
-            <div>
-              <h3 className="font-semibold text-black">LL.B in Law</h3>
-              <p className="text-lg text-black mb-0">
-                Sha&apos;arei Mishpat College · GPA 91
-                <br />
-                <span className="text-purple-600">Licensed Lawyer</span>
-              </p>
+          {/* NICE */}
+          <div className="timeline">
+            <h3>Senior Software Developer</h3>
+            <span className="date">2024 — Present</span>
+            <p className="company">NICE</p>
+            <ul>
+              <li>Architect and deliver AWS serverless application components using TypeScript and Node.js, powering mission-critical enterprise workflows at scale.</li>
+              <li>Design and implement complex Step Functions and Lambda orchestration.</li>
+              <li>Optimize DynamoDB and Redis for high availability and low latency under load.</li>
+              <li>Lead architecture decisions with emphasis on resilience, observability, and long-term maintainability.</li>
+              <li>Leverage modern AI engineering tools to accelerate development velocity.</li>
+              <li>Built event-driven workflows with EventBridge, SQS, and SNS.</li>
+            </ul>
+            <div className="timeline-tech">
+              <span className="tech-chip"><Terminal size={14} /> TypeScript · Node.js</span>
+              <span className="tech-chip"><Cloud size={14} /> AWS Lambdas · Step Functions · SNS · SQS · EventBridge</span>
+              <span className="tech-chip"><Server size={14} /> DynamoDB · Redis</span>
+              <span className="tech-chip"><Zap size={14} /> Github Copilot · Claude · AWS Bedrock </span>
+              <span className="tech-chip"><Server size={14} /> Linux · Windows </span>
             </div>
           </div>
-        </Section>
 
-        <Section id="military" title="Military Service">
-          <div className="flex items-center gap-4">
-            <Shield className="text-purple-600" size={22} />
-            <div>
-              <h3 className="font-semibold text-black">System Administrator (VAX/VMS)</h3>
-              <p className="text-lg text-black">Tel Hashomer Base</p>
+          {/* Locusview */}
+          <div className="timeline">
+            <h3>Senior Software Developer</h3>
+            <span className="date">2022 — 2024</span>
+            <p className="company">Locusview</p>
+            <ul>
+              <li>Led full-stack development of distributed SaaS platform built on microservices.</li>
+              <li>Designed backend services in Java (Spring & Spring Boot) and Node.js.</li>
+              <li>Delivered scalable Angular frontend modules.</li>
+              <li>Built CI/CD pipelines and deployments with Docker and Kubernetes.</li>
+            </ul>
+            <div className="timeline-tech">
+              <span className="tech-chip"><Server size={14} /> Java · Spring Boot · Node.js</span>
+              <span className="tech-chip"><Cpu size={14} /> Angular · Next.Js</span>
+              <span className="tech-chip"><Cloud size={14} /> Docker · Kubernetes · CI/CD</span>
+              <span className="tech-chip"><Server size={14} /> PostgreSQL</span>
+              <span className="tech-chip"><Server size={14} /> Linux · Windows </span>
             </div>
           </div>
-        </Section>
-      </div>
-    </main>
+
+          {/* Algosec */}
+          <div className="timeline">
+            <h3>Software Developer</h3>
+            <span className="date">2020 — 2022</span>
+            <p className="company">Algosec</p>
+            <ul>
+              <li>Developed cybersecurity & firewall automation systems in microservices environments.</li>
+              <li>Improved service reliability and maintainability across distributed components.</li>
+            </ul>
+            <div className="timeline-tech">
+              <span className="tech-chip"><Server size={14} /> Java · Spring · Spring Boot · Hibernate</span>
+              <span className="tech-chip"><Activity size={14} /> Cybersecurity</span>
+              <span className="tech-chip"><Server size={14} /> MongoDB</span>
+              <span className="tech-chip"><Server size={14} /> Linux · Windows </span>
+            </div>
+          </div>
+
+          {/* AT&T */}
+          <div className="timeline">
+            <h3>Software Developer</h3>
+            <span className="date">2017 — 2020</span>
+            <p className="company">AT&T</p>
+            <ul>
+              <li>Built large-scale production systems serving U.S. enterprise customers.</li>
+              <li>Designed distributed system components following best practices.</li>
+              <li>Collaborated with international engineering teams across time zones.</li>
+            </ul>
+            <div className="timeline-tech">
+              <span className="tech-chip"><Server size={14} /> Java · Node.Js · TypeScript</span>
+              <span className="tech-chip"><Cloud size={14} /> AWS </span>
+              <span className="tech-chip"><Server size={14} /> MSSQL · MongoDB</span>
+              <span className="tech-chip"><Server size={14} /> Linux · Windows </span>
+            </div>
+          </div>
+
+          {/* AT&T - QA */}
+          <div className="timeline">
+            <h3>QA Analyst</h3>
+            <span className="date">2015 — 2017</span>
+            <p className="company">AT&T</p>
+            <ul>
+              <li>QA testing for client/server production systems.</li>
+              <li>Designed comprehensive test plans and documentation.</li>
+            </ul>
+            <div className="timeline-tech">
+              <span className="tech-chip"><Activity size={14} /> QA Testing</span>
+              <span className="tech-chip"><Terminal size={14} /> Test Planning & Documentation</span>
+              <span className="tech-chip"><Server size={14} /> Client/Server Production Systems</span>
+            </div>
+          </div>
+
+          {/* Retalix */}
+          <div className="timeline">
+            <h3>QA Analyst</h3>
+            <span className="date">2012 — 2015</span>
+            <p className="company">Retalix</p>
+            <ul>
+              <li>Tested POS systems for global clients.</li>
+              <li>Created acceptance criteria and test documentation.</li>
+            </ul>
+            <div className="timeline-tech">
+              <span className="tech-chip"><Server size={14} /> POS Systems</span>
+              <span className="tech-chip"><Activity size={14} /> Acceptance Testing</span>
+              <span className="tech-chip"><Terminal size={14} /> QA Documentation</span>
+            </div>
+          </div>
+        </section>
+
+        {/* EDUCATION */}
+        <section id="education" className="section">
+          <h2 className="section-title"><Book size={16} /> Education</h2>
+          <div className="timeline">
+            <h3>LL.B Law</h3>
+            <p className="company">Sha'arei Mishpat Academic College</p>
+            <p>Graduated with honors.</p>
+            <p>Licensed Lawyer.</p>
+          </div>
+        </section>
+
+        {/* MILITARY EXPERIENCE */}
+        <section id="military" className="section">
+          <h2 className="section-title"><Shield size={16} /> Military Experience</h2>
+          <div className="timeline">
+            <h3>Systems Administrator & Software Developer</h3>
+            <p className="company">Israel Defense Forces</p>
+            <ul>
+              <li>Administered systems and network infrastructure.</li>
+              <li>Developed internal tools and automation scripts.</li>
+              <li>Provided tech support to unit personnel.</li>
+            </ul>
+          </div>
+        </section>
+
+      </main>
+
+      {terminalOpen && (
+        <div className="terminal">
+          <p>{'> system.boot()'}</p>
+          <p>{'> loading profile...'}</p>
+          <p>{'> ofir_dror.cv loaded'}</p>
+          <p>{'> operational'}</p>
+          <p className="blink">_</p>
+        </div>
+      )}
+    </>
   );
 }
