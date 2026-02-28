@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import {
   Mail,
@@ -53,9 +53,62 @@ export default function Page() {
         style={{ left: mouse.x - 250, top: mouse.y - 250 }}
       />
 
+      <pre className="code-backdrop" aria-hidden="true">
+{`const profile = {
+  name: 'Ofir Dror',
+  role: 'Senior Software Engineer',
+  stack: ['TypeScript', 'Node.js', 'AWS', 'Java'],
+  focus: ['Distributed Systems', 'Serverless', 'Reliability'],
+};
+function buildAtScale(input) {
+  return orchestrate(input)
+    .map(validate)
+    .reduce(optimize)
+    .deploy('production');
+}
+on('event', async payload => {
+  await process(payload);
+  await observe('latency', payload.id);
+  await publish('metrics.ready', payload.id);
+});
+class EngineeringMindset {
+  constructor() {
+    this.principles = ['clarity', 'resilience', 'ownership'];
+  }
+}
+const services = {
+  api: { runtime: 'nodejs20.x', memory: 1024 },
+  worker: { runtime: 'nodejs20.x', memory: 2048 },
+  scheduler: { cron: 'rate(5 minutes)' },
+};
+const pipelines = ['build', 'test', 'scan', 'deploy'];
+async function bootstrap() {
+  const env = await loadEnv();
+  const client = createClient(env.region);
+  await client.connect();
+  return client;
+}
+async function executePipeline(name) {
+  for (const stage of pipelines) {
+    await runStage(name, stage);
+  }
+}
+function latencyP95(values) {
+  const sorted = [...values].sort((a, b) => a - b);
+  return sorted[Math.floor(sorted.length * 0.95)] ?? 0;
+}
+const architecture = {
+  events: ['EventBridge', 'SQS', 'SNS'],
+  storage: ['DynamoDB', 'Redis', 'S3'],
+  observability: ['CloudWatch', 'X-Ray', 'Tracing'],
+};
+export { profile, services, architecture, executePipeline };`}
+      </pre>
+
       <nav className="navbar">
         <button type="button" className="nav-link" onClick={() => scrollToSection('about')}>About</button>
         <button type="button" className="nav-link" onClick={() => scrollToSection('experience')}>Experience</button>
+        <button type="button" className="nav-link" onClick={() => scrollToSection('skills')}>Skills</button>
         <button type="button" className="nav-link" onClick={() => scrollToSection('education')}>Education</button>
         <button type="button" className="nav-link" onClick={() => scrollToSection('military')}>Military</button>
       </nav>
@@ -209,6 +262,19 @@ export default function Page() {
           </div>
         </section>
 
+        {/* SKILLS */}
+        <section id="skills" className="section">
+          <h2 className="section-title"><Cpu size={16} /> Skills</h2>
+          <div className="metrics-grid">
+            <MetricBar icon={<Terminal size={14} />} label="Backend & APIs" value={100} detail="Node.js · TypeScript · Java · Spring" />
+            <MetricBar icon={<Cloud size={14} />} label="Cloud & Serverless" value={100} detail="AWS Lambda · Step Functions · EventBridge" />
+            <MetricBar icon={<Server size={14} />} label="Databases" value={100} detail="DynamoDB · PostgreSQL · MongoDB · Redis" />
+            <MetricBar icon={<Cpu size={14} />} label="Architecture" value={100} detail="Distributed SaaS · Microservices · Scalability" />
+            <MetricBar icon={<Activity size={14} />} label="Reliability" value={100} detail="Observability · Production Stability · Incident Response" />
+            <MetricBar icon={<Zap size={14} />} label="AI Productivity" value={100} detail="Copilot · Claude · Bedrock-assisted delivery" />
+          </div>
+        </section>
+
         {/* EDUCATION */}
         <section id="education" className="section">
           <h2 className="section-title"><Book size={16} /> Education</h2>
@@ -246,5 +312,35 @@ export default function Page() {
         </div>
       )}
     </>
+  );
+}
+
+function MetricBar({
+  icon,
+  label,
+  value,
+  detail,
+}: {
+  icon: ReactNode;
+  label: string;
+  value: number;
+  detail: string;
+}) {
+  return (
+    <div className="metric-card">
+      <div className="metric-top">
+        <div className="metric-label">{icon}{label}</div>
+      </div>
+      <div className="metric-track">
+        <motion.div
+          className="metric-fill"
+          initial={{ width: 0 }}
+          whileInView={{ width: `${value}%` }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+        />
+      </div>
+      <p className="metric-detail">{detail}</p>
+    </div>
   );
 }
