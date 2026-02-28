@@ -158,12 +158,12 @@ export { profile, services, architecture, executePipeline };`}
             <span className="date">2024 — Present</span>
             <p className="company">NICE</p>
             <ul>
-              <li>Architect and deliver AWS serverless application components using TypeScript and Node.js, powering mission-critical enterprise workflows at scale.</li>
-              <li>Design and implement complex Step Functions and Lambda orchestration.</li>
-              <li>Optimize DynamoDB and Redis for high availability and low latency under load.</li>
+              <li>Architect and deliver <span className="skill-highlight">AWS</span> serverless application components using <span className="skill-highlight">TypeScript</span> and <span className="skill-highlight">Node.js</span>, powering mission-critical enterprise workflows at scale.</li>
+              <li>Design and implement complex <span className="skill-highlight">Step Functions</span> and <span className="skill-highlight">Lambda</span> orchestration.</li>
+              <li>Optimize <span className="skill-highlight">DynamoDB</span> and <span className="skill-highlight">Redis</span> for high availability and low latency under load.</li>
               <li>Lead architecture decisions with emphasis on resilience, observability, and long-term maintainability.</li>
               <li>Leverage modern AI engineering tools to accelerate development velocity.</li>
-              <li>Built event-driven workflows with EventBridge, SQS, and SNS.</li>
+              <li>Built event-driven workflows with <span className="skill-highlight">EventBridge</span>, <span className="skill-highlight">SQS</span>, and <span className="skill-highlight">SNS</span>.</li>
             </ul>
             <div className="timeline-tech">
               <span className="tech-chip"><Terminal size={14} /> TypeScript · Node.js</span>
@@ -181,9 +181,9 @@ export { profile, services, architecture, executePipeline };`}
             <p className="company">Locusview</p>
             <ul>
               <li>Led full-stack development of distributed SaaS platform built on microservices.</li>
-              <li>Designed backend services in Java (Spring & Spring Boot) and Node.js.</li>
-              <li>Delivered scalable Angular frontend modules.</li>
-              <li>Built CI/CD pipelines and deployments with Docker and Kubernetes.</li>
+              <li>Designed backend services in <span className="skill-highlight">Java</span> (<span className="skill-highlight">Spring</span> & <span className="skill-highlight">Spring Boot</span>) and <span className="skill-highlight">Node.js</span>.</li>
+              <li>Delivered scalable <span className="skill-highlight">Angular</span> frontend modules.</li>
+              <li>Built CI/CD pipelines and deployments with <span className="skill-highlight">Docker</span> and <span className="skill-highlight">Kubernetes</span>.</li>
             </ul>
             <div className="timeline-tech">
               <span className="tech-chip"><Server size={14} /> Java · Spring Boot · Node.js</span>
@@ -200,7 +200,7 @@ export { profile, services, architecture, executePipeline };`}
             <span className="date">2020 — 2022</span>
             <p className="company">Algosec</p>
             <ul>
-              <li>Developed cybersecurity & firewall automation systems in microservices environments.</li>
+              <li>Developed <span className="skill-highlight">cybersecurity</span> & firewall automation systems in <span className="skill-highlight">microservices</span> environments.</li>
               <li>Improved service reliability and maintainability across distributed components.</li>
             </ul>
             <div className="timeline-tech">
@@ -218,7 +218,7 @@ export { profile, services, architecture, executePipeline };`}
             <p className="company">AT&T</p>
             <ul>
               <li>Built large-scale production systems serving U.S. enterprise customers.</li>
-              <li>Designed distributed system components following best practices.</li>
+              <li>Designed <span className="skill-highlight">distributed systems</span> components following best practices.</li>
               <li>Collaborated with international engineering teams across time zones.</li>
             </ul>
             <div className="timeline-tech">
