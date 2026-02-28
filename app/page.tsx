@@ -1,13 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 import {
   Mail,
   Phone,
   MapPin,
-  Github,
   Linkedin,
   Cpu,
   Server,
@@ -129,7 +127,7 @@ export default function Page() {
             </ul>
             <div className="timeline-tech">
               <span className="tech-chip"><Server size={14} /> Java · Spring Boot · Node.js</span>
-              <span className="tech-chip"><Cpu size={14} /> Angular · Next.Js</span>
+              <span className="tech-chip"><Cpu size={14} /> Angular · Next.js</span>
               <span className="tech-chip"><Cloud size={14} /> Docker · Kubernetes · CI/CD</span>
               <span className="tech-chip"><Server size={14} /> PostgreSQL</span>
               <span className="tech-chip"><Server size={14} /> Linux · Windows </span>
