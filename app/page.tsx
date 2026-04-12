@@ -298,7 +298,7 @@ export { profile, services, architecture, executePipeline };`}
             <MetricBar icon={<Cloud size={14} />} label="Cloud & Serverless" value={100} detail="AWS Lambdas - Step Functions - EventBridge - SQS - SNS" />
             <MetricBar icon={<Server size={14} />} label="Databases" value={100} detail="DynamoDB - PostgreSQL - MongoDB - Redis" />
             <MetricBar icon={<Cpu size={14} />} label="Architecture" value={100} detail="Distributed SaaS - Microservices - Scalability" />
-            <MetricBar icon={<Cpu size={14} />} label="Architecture" value={100} detail="Distributed SaaS - Microservices - Scalability" />
+            <MetricBar icon={<Activity size={14} />} label="Observability" value={100} detail="CloudWatch - Logs Insights - Tracing - Reliability" />
             <MetricBar icon={<Activity size={14} />} label="Tools" value={100} detail="Docker - Kubernetes - Jenkins - Github" />
             <MetricBar icon={<Zap size={14} />} label="AI Productivity" value={100} detail="Github Copilot - Claude - AWS Bedrock" />
           </div>
@@ -309,7 +309,7 @@ export { profile, services, architecture, executePipeline };`}
           <h2 className="section-title"><Book size={16} /> Education</h2>
           <div className="timeline">
             <h3>LL.B Law</h3>
-            <p className="company">Sha'arei Mishpat Academic College</p>
+            <p className="company">Sha&apos;arei Mishpat Academic College</p>
             <p>Graduated with honors.</p>
             <p>Licensed Lawyer.</p>
           </div>

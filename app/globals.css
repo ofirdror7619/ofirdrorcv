@@ -99,7 +99,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  font-family: inherit;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   color: var(--text);
   text-decoration: none;
   font-size: 13px;
@@ -149,6 +149,7 @@ body {
 }
 
 .name {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   font-size: clamp(46px, 8vw, 82px);
   font-weight: 800;
   margin: 0;
@@ -186,6 +187,7 @@ body {
 .headline {
   margin-top: 20px;
   font-size: 22px;
+  line-height: 1.45;
   color: var(--muted);
   max-width: 100%;
   text-align: justify;
@@ -239,6 +241,8 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  letter-spacing: 0.01em;
   font-size: 26px;
   margin: 0 0 20px;
   color: var(--accent);
@@ -297,12 +301,13 @@ body {
   margin: 8px 0 0;
   color: var(--muted);
   font-size: 12px;
+  line-height: 1.45;
 }
 
 /* Timeline */
 
 .timeline {
-  padding: 30px;
+  padding: 28px;
   border-radius: 16px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.08);
@@ -317,6 +322,7 @@ body {
 
 .timeline h3 {
   margin: 0;
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   font-size: 20px;
 }
 
@@ -370,10 +376,16 @@ body {
 .timeline ul {
   padding-left: 18px;
   list-style-type: disc;
+  margin: 0 0 8px;
 }
 
 .timeline li {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  line-height: 1.55;
+}
+
+.timeline li:last-child {
+  margin-bottom: 0;
 }
 
 /* Terminal */
@@ -472,6 +484,7 @@ body {
   .headline {
     margin-top: 14px;
     font-size: 16px;
+    text-align: left;
   }
 
   .contact {
