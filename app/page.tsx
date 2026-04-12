@@ -107,9 +107,11 @@ export { profile, services, architecture, executePipeline };`}
 
       <nav className="navbar">
         <button type="button" className="nav-link" onClick={() => scrollToSection('about')}>About</button>
+        <button type="button" className="nav-link" onClick={() => scrollToSection('achievements')}>Achievements</button>
         <button type="button" className="nav-link" onClick={() => scrollToSection('experience')}>Experience</button>
         <button type="button" className="nav-link" onClick={() => scrollToSection('skills')}>Skills</button>
         <button type="button" className="nav-link" onClick={() => scrollToSection('education')}>Education</button>
+        <button type="button" className="nav-link" onClick={() => scrollToSection('courses')}>Courses</button>
         <button type="button" className="nav-link" onClick={() => scrollToSection('military')}>Military</button>
       </nav>
 
@@ -134,8 +136,11 @@ export { profile, services, architecture, executePipeline };`}
           </motion.h1>
 
           <p className="headline">
-            Senior Software Engineer specializing in large-scale distributed SaaS systems,
-            microservices and serverless cloud architectures.
+            Senior Software Engineer specializing in large-scale distributed systems,
+            serverless architectures, and AI-driven solutions on AWS. Proven track record
+            of improving performance, reducing cloud costs, and delivering scalable,
+            production-grade systems. Experienced in microservices, RAG-based AI workflows,
+            and driving engineering productivity through modern tools and automation.
           </p>
 
           <div className="contact">
@@ -148,6 +153,27 @@ export { profile, services, architecture, executePipeline };`}
           </div>
         </section>
 
+        {/* KEY ACHIEVEMENTS */}
+        <section id="achievements" className="section">
+          <h2 className="section-title"><Activity size={16} /> Key Achievements</h2>
+          <div className="timeline">
+            <ul>
+              <li>Reduced latency and cloud costs by optimizing <span className="skill-highlight">DynamoDB</span> access patterns, indexing strategies, and <span className="skill-highlight">Redis</span> caching.</li>
+              <li>Drove cloud cost reduction through process optimization, efficient <span className="skill-highlight">CloudWatch Logs Insights</span> queries, and reduced storage/compute usage.</li>
+              <li>Designed and implemented <span className="skill-highlight">RAG-based AI workflows</span> integrating <span className="skill-highlight">DynamoDB</span>, <span className="skill-highlight">Redis</span>, and logs with <span className="skill-highlight">LLMs</span>.</li>
+              <li>Led adoption of <span className="skill-highlight">AI tools</span> and custom <span className="skill-highlight">AI agents</span>, improving team productivity.</li>
+              <li>Delivered scalable distributed systems supporting high availability and business-critical operations.</li>
+            </ul>
+            <div className="timeline-tech">
+              <span className="tech-chip"><Terminal size={14} /> TypeScript - Node.js</span>
+              <span className="tech-chip"><Cloud size={14} /> AWS Lambdas - Step Functions - SNS - SQS - EventBridge</span>
+              <span className="tech-chip"><Server size={14} /> DynamoDB - Redis</span>
+              <span className="tech-chip"><Zap size={14} /> Github Copilot - Claude - AWS Bedrock</span>
+              <span className="tech-chip"><Server size={14} /> Linux - Windows</span>
+            </div>
+          </div>
+        </section>
+
         {/* EXPERIENCE */}
         <section id="experience" className="section">
           <h2 className="section-title"><Terminal size={16} /> Professional Experience</h2>
@@ -155,29 +181,31 @@ export { profile, services, architecture, executePipeline };`}
           {/* NICE */}
           <div className="timeline">
             <h3>Senior Software Engineer</h3>
-            <span className="date">2024 — Present</span>
+            <span className="date">2024 - Present</span>
             <p className="company">NICE</p>
             <ul>
-              <li>Architect and deliver <span className="skill-highlight">AWS</span> serverless application components using <span className="skill-highlight">TypeScript</span> and <span className="skill-highlight">Node.js</span>, powering mission-critical enterprise workflows at scale.</li>
-              <li>Design and implement complex <span className="skill-highlight">Step Functions</span> and <span className="skill-highlight">Lambda</span> orchestration.</li>
-              <li>Optimize <span className="skill-highlight">DynamoDB</span> and <span className="skill-highlight">Redis</span> for high availability and low latency under load.</li>
-              <li>Lead architecture decisions with emphasis on resilience, observability, and long-term maintainability.</li>
-              <li>Leverage modern AI engineering tools to accelerate development velocity.</li>
-              <li>Built event-driven workflows with <span className="skill-highlight">EventBridge</span>, <span className="skill-highlight">SQS</span>, and <span className="skill-highlight">SNS</span>.</li>
+              <li>Built <span className="skill-highlight">AWS</span> serverless systems using <span className="skill-highlight">Lambda</span>, <span className="skill-highlight">Step Functions</span>, and <span className="skill-highlight">event-driven architectures</span>.</li>
+              <li>Designed scalable, resilient production systems.</li>
+              <li>Improved performance and reduced costs via <span className="skill-highlight">DynamoDB</span> optimization and <span className="skill-highlight">Redis</span> caching.</li>
+              <li>Optimized cloud usage by refining processes, logs queries, and storage consumption.</li>
+              <li>Designed and implemented <span className="skill-highlight">RAG-based AI workflows</span> integrating <span className="skill-highlight">DynamoDB</span>, <span className="skill-highlight">Redis</span>, and logs for context-aware analysis.</li>
+              <li>Implemented guardrails using <span className="skill-highlight">Amazon Bedrock</span> to prevent hallucinations and protect sensitive data.</li>
+              <li>Led adoption of <span className="skill-highlight">AI tools</span> and custom <span className="skill-highlight">AI agents</span> across the team.</li>
+              <li>Worked on high-scale production systems with real-time data processing and strict reliability requirements.</li>
             </ul>
             <div className="timeline-tech">
-              <span className="tech-chip"><Terminal size={14} /> TypeScript · Node.js</span>
-              <span className="tech-chip"><Cloud size={14} /> AWS Lambdas · Step Functions · SNS · SQS · EventBridge</span>
-              <span className="tech-chip"><Server size={14} /> DynamoDB · Redis</span>
-              <span className="tech-chip"><Zap size={14} /> Github Copilot · Claude · AWS Bedrock </span>
-              <span className="tech-chip"><Server size={14} /> Linux · Windows </span>
+              <span className="tech-chip"><Terminal size={14} /> TypeScript - Node.js</span>
+              <span className="tech-chip"><Cloud size={14} /> AWS Lambdas - Step Functions - SNS - SQS - EventBridge</span>
+              <span className="tech-chip"><Server size={14} /> DynamoDB - Redis</span>
+              <span className="tech-chip"><Zap size={14} /> Github Copilot - Claude - AWS Bedrock </span>
+              <span className="tech-chip"><Server size={14} /> Linux - Windows </span>
             </div>
           </div>
 
           {/* Locusview */}
           <div className="timeline">
             <h3>Senior Software Engineer</h3>
-            <span className="date">2022 — 2024</span>
+            <span className="date">2022 - 2024</span>
             <p className="company">Locusview</p>
             <ul>
               <li>Led full-stack development of distributed SaaS platform built on microservices.</li>
@@ -186,35 +214,35 @@ export { profile, services, architecture, executePipeline };`}
               <li>Built CI/CD pipelines and deployments with <span className="skill-highlight">Docker</span> and <span className="skill-highlight">Kubernetes</span>.</li>
             </ul>
             <div className="timeline-tech">
-              <span className="tech-chip"><Server size={14} /> Java · Spring Boot · Node.js</span>
-              <span className="tech-chip"><Cpu size={14} /> Angular · Next.js</span>
-              <span className="tech-chip"><Cloud size={14} /> Docker · Kubernetes · CI/CD</span>
+              <span className="tech-chip"><Server size={14} /> Java - Spring Boot - Node.js</span>
+              <span className="tech-chip"><Cpu size={14} /> Angular - Next.js</span>
+              <span className="tech-chip"><Cloud size={14} /> Docker - Kubernetes - CI/CD</span>
               <span className="tech-chip"><Server size={14} /> PostgreSQL</span>
-              <span className="tech-chip"><Server size={14} /> Linux · Windows </span>
+              <span className="tech-chip"><Server size={14} /> Linux - Windows </span>
             </div>
           </div>
 
           {/* Algosec */}
           <div className="timeline">
             <h3>Software Engineer</h3>
-            <span className="date">2020 — 2022</span>
+            <span className="date">2020 - 2022</span>
             <p className="company">Algosec</p>
             <ul>
               <li>Developed <span className="skill-highlight">cybersecurity</span> & firewall automation systems in <span className="skill-highlight">microservices</span> environments.</li>
               <li>Improved service reliability and maintainability across distributed components.</li>
             </ul>
             <div className="timeline-tech">
-              <span className="tech-chip"><Server size={14} /> Java · Spring · Spring Boot · Hibernate</span>
+              <span className="tech-chip"><Server size={14} /> Java - Spring - Spring Boot - Hibernate</span>
               <span className="tech-chip"><Activity size={14} /> Cybersecurity</span>
               <span className="tech-chip"><Server size={14} /> MongoDB</span>
-              <span className="tech-chip"><Server size={14} /> Linux · Windows </span>
+              <span className="tech-chip"><Server size={14} /> Linux - Windows </span>
             </div>
           </div>
 
           {/* AT&T */}
           <div className="timeline">
             <h3>Software Engineer</h3>
-            <span className="date">2017 — 2020</span>
+            <span className="date">2017 - 2020</span>
             <p className="company">AT&T</p>
             <ul>
               <li>Built large-scale production systems serving U.S. enterprise customers.</li>
@@ -222,17 +250,17 @@ export { profile, services, architecture, executePipeline };`}
               <li>Collaborated with international engineering teams across time zones.</li>
             </ul>
             <div className="timeline-tech">
-              <span className="tech-chip"><Server size={14} /> Java · Node.Js · TypeScript</span>
+              <span className="tech-chip"><Server size={14} /> Java - Node.Js - TypeScript</span>
               <span className="tech-chip"><Cloud size={14} /> AWS </span>
-              <span className="tech-chip"><Server size={14} /> MSSQL · MongoDB</span>
-              <span className="tech-chip"><Server size={14} /> Linux · Windows </span>
+              <span className="tech-chip"><Server size={14} /> MSSQL - MongoDB</span>
+              <span className="tech-chip"><Server size={14} /> Linux - Windows </span>
             </div>
           </div>
 
           {/* AT&T - QA */}
           <div className="timeline">
             <h3>QA Analyst</h3>
-            <span className="date">2015 — 2017</span>
+            <span className="date">2015 - 2017</span>
             <p className="company">AT&T</p>
             <ul>
               <li>QA testing for client/server production systems.</li>
@@ -248,7 +276,7 @@ export { profile, services, architecture, executePipeline };`}
           {/* Retalix */}
           <div className="timeline">
             <h3>QA Analyst</h3>
-            <span className="date">2012 — 2015</span>
+            <span className="date">2012 - 2015</span>
             <p className="company">Retalix</p>
             <ul>
               <li>Tested POS systems for global clients.</li>
@@ -266,13 +294,13 @@ export { profile, services, architecture, executePipeline };`}
         <section id="skills" className="section">
           <h2 className="section-title"><Cpu size={16} /> Skills</h2>
           <div className="metrics-grid">
-            <MetricBar icon={<Terminal size={14} />} label="Languages & Frameworks" value={100} detail="Node.js · TypeScript · Java · Angular · Next.js · Spring" />
-            <MetricBar icon={<Cloud size={14} />} label="Cloud & Serverless" value={100} detail="AWS Lambdas · Step Functions · EventBridge · SQS · SNS" />
-            <MetricBar icon={<Server size={14} />} label="Databases" value={100} detail="DynamoDB · PostgreSQL · MongoDB · Redis" />
-            <MetricBar icon={<Cpu size={14} />} label="Architecture" value={100} detail="Distributed SaaS · Microservices · Scalability" />
-            <MetricBar icon={<Cpu size={14} />} label="Architecture" value={100} detail="Distributed SaaS · Microservices · Scalability" />
-            <MetricBar icon={<Activity size={14} />} label="Tools" value={100} detail="Docker · Kubernetes · Jenkins · Github" />
-            <MetricBar icon={<Zap size={14} />} label="AI Productivity" value={100} detail="Github Copilot · Claude · AWS Bedrock" />
+            <MetricBar icon={<Terminal size={14} />} label="Languages & Frameworks" value={100} detail="Node.js - TypeScript - Java - Angular - Next.js - Spring" />
+            <MetricBar icon={<Cloud size={14} />} label="Cloud & Serverless" value={100} detail="AWS Lambdas - Step Functions - EventBridge - SQS - SNS" />
+            <MetricBar icon={<Server size={14} />} label="Databases" value={100} detail="DynamoDB - PostgreSQL - MongoDB - Redis" />
+            <MetricBar icon={<Cpu size={14} />} label="Architecture" value={100} detail="Distributed SaaS - Microservices - Scalability" />
+            <MetricBar icon={<Cpu size={14} />} label="Architecture" value={100} detail="Distributed SaaS - Microservices - Scalability" />
+            <MetricBar icon={<Activity size={14} />} label="Tools" value={100} detail="Docker - Kubernetes - Jenkins - Github" />
+            <MetricBar icon={<Zap size={14} />} label="AI Productivity" value={100} detail="Github Copilot - Claude - AWS Bedrock" />
           </div>
         </section>
 
@@ -284,6 +312,20 @@ export { profile, services, architecture, executePipeline };`}
             <p className="company">Sha'arei Mishpat Academic College</p>
             <p>Graduated with honors.</p>
             <p>Licensed Lawyer.</p>
+          </div>
+        </section>
+
+        {/* PROFESSIONAL COURSES */}
+        <section id="courses" className="section">
+          <h2 className="section-title"><Book size={16} /> Professional Courses</h2>
+          <div className="timeline">
+            <ul>
+              <li>Full Stack Development (Angular & Java) - Hands-on scalable web applications</li>
+              <li>Advanced Java - Backend systems, performance, OOP</li>
+              <li>AWS Fundamentals - Cloud-native & serverless architectures</li>
+              <li>Advanced Kubernetes - Scaling and production deployments</li>
+              <li>Vibe Coding - AI-assisted development & agent workflows</li>
+            </ul>
           </div>
         </section>
 
@@ -345,3 +387,5 @@ function MetricBar({
     </div>
   );
 }
+
+
